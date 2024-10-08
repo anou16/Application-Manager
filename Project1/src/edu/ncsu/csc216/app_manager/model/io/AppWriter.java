@@ -13,7 +13,8 @@ public class AppWriter {
 	/**
 	 * Writes to a specific file.
 	 * 
-	 * @param filename the name of the file being written to.
+	 * @param filename     the name of the file being written to.
+	 * @param applications the ArrayList of applications being written to the file.
 	 * @throws IllegalArgumentException if there are any errors in writing to the
 	 *                                  file.
 	 */

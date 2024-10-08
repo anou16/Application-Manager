@@ -3,7 +3,7 @@
  */
 package edu.ncsu.csc216.app_manager.model.application;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 

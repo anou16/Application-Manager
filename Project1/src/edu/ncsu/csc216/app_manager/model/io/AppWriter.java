@@ -13,7 +13,7 @@ public class AppWriter {
 	 * @throws IllegalArgumentException if there are any errors in writing to the
 	 *                                  file.
 	 */
-	public void writeAppsToFile(String filename) {
+	public static void writeAppsToFile(String filename) {
 		// Implement
 	}
 }

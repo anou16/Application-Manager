@@ -48,13 +48,13 @@ public class Command {
 	private String note;
 
 	/** "ReviewCompleted" resolution */
-	public final String R_REVCOMPLETED = "ReviewCompleted";
+	public static final String R_REVCOMPLETED = "ReviewCompleted";
 	/** "InterviewCompleted resolution */
-	public final String R_INTCOMPLETED = "InterviewCoompleted";
+	public static final String R_INTCOMPLETED = "InterviewCoompleted";
 	/** "ReferenceCheckCompleted" resolution */
-	public final String R_REFCHKCOMPLETED = "ReferenceCheckCompleted";
+	public static final String R_REFCHKCOMPLETED = "ReferenceCheckCompleted";
 	/** "OfferCompleted" resolution */
-	public final String R_OFFERCOMPLETED = "OfferCompleted";
+	public static final String R_OFFERCOMPLETED = "OfferCompleted";
 
 	/**
 	 * Constructor for Command which allows application transitions to update.

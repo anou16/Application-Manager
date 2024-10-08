@@ -27,7 +27,7 @@ public class Application {
 	/** Old application type string. */
 	public final static String A_OLD = "Old";
 	/** Hired application type string. */
-	public final String A_HIRED = "Hired";
+	public final static String A_HIRED = "Hired";
 	/** Review state string. */
 	public final static String REVIEW_NAME = "Review";
 	/** Interview state string. */

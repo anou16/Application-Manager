@@ -18,7 +18,7 @@ public class AppReader {
 	 * @throws IllegalArgumentException if the file cannot be found or an error
 	 *                                  during processing occurs.
 	 */
-	public ArrayList<Application> readAppsFromFile(String filename) {
+	public static ArrayList<Application> readAppsFromFile(String filename) {
 		return null;
 	}
 

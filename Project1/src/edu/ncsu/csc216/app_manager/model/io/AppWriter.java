@@ -17,7 +17,7 @@ public class AppWriter {
 	 * @throws IllegalArgumentException if there are any errors in writing to the
 	 *                                  file.
 	 */
-	public void writeAppsToFile(String filename, List<Application> applications) {
+	public static void writeAppsToFile(String filename, List<Application> applications) {
 		// Implement
 	}
 }

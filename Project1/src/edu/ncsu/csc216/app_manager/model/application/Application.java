@@ -12,7 +12,7 @@ import edu.ncsu.csc216.app_manager.model.command.Command.Resolution;
  * @author Anoushka Piduru
  */
 public class Application {
-	/** The possible categorized types of the application. */
+	/** The possible categorized type of the application. */
 	public enum AppType {
 		/** A new application. */
 		NEW,

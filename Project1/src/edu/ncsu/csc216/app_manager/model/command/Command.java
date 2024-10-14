@@ -68,16 +68,16 @@ public class Command {
 	 * @param note         the application's added note.
 	 * @throws IllegalArgumentException if the command has an invalid parameter.
 	 */
-	public Command(CommandValue commandValue, String reviewerId, Resolution resolution, String note) {
-		if (commandValue == null) {
+	public Command(CommandValue c, String reviewerId, Resolution r, String note) {
+		if (c == null) {
 			throw new IllegalArgumentException("Invalid command.");
 		}
 
-		if (commandValue == CommandValue.ACCEPT && reviewerId.length() == 0) {
+		if (c == CommandValue.ACCEPT && reviewerId.length() == 0) {
 			throw new IllegalArgumentException("Invalid command.");
 		}
 
-		if (commandValue == CommandValue.STANDBY || commandValue == CommandValue.REJECT && resolution == null) {
+		if (c == CommandValue.STANDBY || c == CommandValue.REJECT && r == null) {
 			throw new IllegalArgumentException("Invalid command.");
 		}
 
@@ -85,9 +85,9 @@ public class Command {
 			throw new IllegalArgumentException("Invalid command.");
 		}
 
-		this.commandValue = commandValue;
+		this.commandValue = c;
 		this.reviewerId = reviewerId;
-		this.resolution = resolution;
+		this.resolution = r;
 		this.note = note;
 	}
 

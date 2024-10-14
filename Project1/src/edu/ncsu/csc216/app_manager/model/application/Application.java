@@ -120,7 +120,7 @@ public class Application {
 	 * @throws IllegalArgumentException if the Application cannot be created
 	 */
 	public Application(int id, AppType appType, String summary, String note) {
-		if (appType == null || summary.isEmpty() || note.isEmpty() || id < 1) {
+		if (appType == null || summary == null || summary.isEmpty() || note == null || note.isEmpty() || id < 1) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 
@@ -150,7 +150,14 @@ public class Application {
 	 */
 	public Application(int id, String state, String appType, String summary, String reviewer, boolean confirmed,
 			String resolution, ArrayList<String> notes) {
-		// Implement
+		setAppId(id);
+		setState(state);
+		setAppType(appType);
+		setSummary(summary);
+		setReviewer(reviewer);
+		this.processPaperwork = confirmed;
+		setResolution(resolution);
+		setNotes(notes);
 	}
 
 	/**
@@ -177,7 +184,7 @@ public class Application {
 	 * @return appType the application type.
 	 */
 	public String getAppType() {
-		return null;
+		return appType.name();
 	}
 
 	/**
@@ -213,7 +220,7 @@ public class Application {
 	 * @return resolution the application resolution.
 	 */
 	public String getResolution() {
-		return null;
+		return resolution.name();
 	}
 
 	/**
@@ -230,7 +237,10 @@ public class Application {
 	 * 
 	 * @param appId the appId to set.
 	 */
-	public void setAppId(int appId) {
+	private void setAppId(int appId) {
+		if (appId < 1) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 		this.appId = appId;
 	}
 
@@ -239,8 +249,33 @@ public class Application {
 	 * 
 	 * @param state the state to set.
 	 */
-	public void setState(AppState state) {
-		this.state = state;
+	private void setState(String state) {
+		if (state == null || state.isEmpty()) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
+
+		switch (state) {
+		case REVIEW_NAME:
+			this.state = reviewState;
+			break;
+		case INTERVIEW_NAME:
+			this.state = interviewState;
+			break;
+		case WAITLIST_NAME:
+			this.state = waitlistState;
+			break;
+		case REFCHK_NAME:
+			this.state = refChkState;
+			break;
+		case OFFER_NAME:
+			this.state = offerState;
+			break;
+		case CLOSED_NAME:
+			this.state = closedState;
+			break;
+		default:
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 	}
 
 	/**
@@ -248,8 +283,24 @@ public class Application {
 	 * 
 	 * @param appType the appType to set.
 	 */
-	public void setAppType(AppType appType) {
-		this.appType = appType;
+	private void setAppType(String appType) {
+		if (appType == null || appType.isEmpty()) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
+
+		switch (appType) {
+		case A_NEW:
+			this.appType = AppType.NEW;
+			break;
+		case A_OLD:
+			this.appType = AppType.OLD;
+			break;
+		case A_HIRED:
+			this.appType = AppType.HIRED;
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid application type.");
+		}
 	}
 
 	/**
@@ -257,7 +308,7 @@ public class Application {
 	 * 
 	 * @param summary the summary to set.
 	 */
-	public void setSummary(String summary) {
+	private void setSummary(String summary) {
 		this.summary = summary;
 	}
 
@@ -266,7 +317,7 @@ public class Application {
 	 * 
 	 * @param reviewer the reviewer to set.
 	 */
-	public void setReviewer(String reviewer) {
+	private void setReviewer(String reviewer) {
 		this.reviewer = reviewer;
 	}
 
@@ -275,7 +326,7 @@ public class Application {
 	 * 
 	 * @param processPaperwork the processPaperwork to set.
 	 */
-	public void setProcessPaperwork(boolean processPaperwork) {
+	private void setProcessPaperwork(boolean processPaperwork) {
 		this.processPaperwork = processPaperwork;
 	}
 
@@ -284,8 +335,27 @@ public class Application {
 	 * 
 	 * @param resolution the resolution to set.
 	 */
-	public void setResolution(Resolution resolution) {
-		this.resolution = resolution;
+	private void setResolution(String resolution) {
+		if (resolution == null) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
+
+		switch (resolution) {
+		case Command.R_REVCOMPLETED:
+			this.resolution = Resolution.REVCOMPLETED;
+			break;
+		case Command.R_INTCOMPLETED:
+			this.resolution = Resolution.INTCOMPLETED;
+			break;
+		case Command.R_REFCHKCOMPLETED:
+			this.resolution = Resolution.REFCHKCOMPLETED;
+			break;
+		case Command.R_OFFERCOMPLETED:
+			this.resolution = Resolution.OFFERCOMPLETED;
+			break;
+		default:
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 	}
 
 	/**
@@ -293,7 +363,10 @@ public class Application {
 	 * 
 	 * @param notes the notes to set.
 	 */
-	public void setNotes(ArrayList<String> notes) {
+	private void setNotes(ArrayList<String> notes) {
+		if (notes == null) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 		this.notes = notes;
 	}
 
@@ -313,7 +386,10 @@ public class Application {
 	 * @return a string representation of the application.
 	 */
 	public String toString() {
-		return null;
+		String s = "";
+		s += getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + "," + getReviewer()
+				+ isProcessed() + ",";
+		return s;
 	}
 
 	/**
@@ -322,7 +398,11 @@ public class Application {
 	 * @param note the note being added to the application.
 	 */
 	private void addNote(String note) {
-		// Implement
+		if (note == null || note.isEmpty()) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
+
+		notes.add("[" + state.getStateName() + "] " + note);
 	}
 
 	/**

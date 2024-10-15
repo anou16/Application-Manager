@@ -127,11 +127,8 @@ public class Application {
 		this.appId = id;
 		this.appType = appType;
 		this.summary = summary;
-		this.reviewer = null;
-		this.processPaperwork = false;
 		this.notes = new ArrayList<>();
 		this.notes.add(note);
-		this.state = reviewState;
 	}
 
 	/**
@@ -155,7 +152,7 @@ public class Application {
 		setAppType(appType);
 		setSummary(summary);
 		setReviewer(reviewer);
-		this.processPaperwork = confirmed;
+		setProcessPaperwork(confirmed);
 		setResolution(resolution);
 		setNotes(notes);
 	}
@@ -173,18 +170,43 @@ public class Application {
 	 * Getter for application state.
 	 * 
 	 * @return state the application state.
+	 * @throws IllegalArgumentException if the state is invalid.
 	 */
-	public AppState getState() {
-		return state;
+	public String getState() {
+		if (state instanceof ReviewState) {
+			return REVIEW_NAME;
+		} else if (state instanceof InterviewState) {
+			return INTERVIEW_NAME;
+		} else if (state instanceof WaitlistState) {
+			return WAITLIST_NAME;
+		} else if (state instanceof RefChkState) {
+			return REFCHK_NAME;
+		} else if (state instanceof OfferState) {
+			return OFFER_NAME;
+		} else if (state instanceof ClosedState) {
+			return CLOSED_NAME;
+		} else {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 	}
 
 	/**
 	 * Getter for application type.
 	 * 
 	 * @return appType the application type.
+	 * @throws IllegalArgumentException if the application type is invalid.
 	 */
 	public String getAppType() {
-		return appType.name();
+		switch (appType) {
+		case AppType.NEW:
+			return A_NEW;
+		case AppType.OLD:
+			return A_OLD;
+		case AppType.HIRED:
+			return A_HIRED;
+		default:
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 	}
 
 	/**
@@ -218,9 +240,21 @@ public class Application {
 	 * Getter for application resolution.
 	 * 
 	 * @return resolution the application resolution.
+	 * @throws IllegalArgumentException if the resolution is invalid.
 	 */
 	public String getResolution() {
-		return resolution.name();
+		switch (resolution) {
+		case Resolution.REVCOMPLETED:
+			return Command.R_REVCOMPLETED;
+		case Resolution.INTCOMPLETED:
+			return Command.R_INTCOMPLETED;
+		case Resolution.REFCHKCOMPLETED:
+			return Command.R_REFCHKCOMPLETED;
+		case Resolution.OFFERCOMPLETED:
+			return Command.R_OFFERCOMPLETED;
+		default:
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 	}
 
 	/**
@@ -235,19 +269,21 @@ public class Application {
 	/**
 	 * Setter for application ID.
 	 * 
-	 * @param appId the appId to set.
+	 * @param id the appId to set.
+	 * @throws IllegalArgumentException if the id is invalid.
 	 */
-	private void setAppId(int appId) {
-		if (appId < 1) {
+	private void setAppId(int id) {
+		if (id < 1) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		this.appId = appId;
+		this.appId = id;
 	}
 
 	/**
 	 * Setter for application state.
 	 * 
 	 * @param state the state to set.
+	 * @throws IllegalArgumentException if the state is invalid.
 	 */
 	private void setState(String state) {
 		if (state == null || state.isEmpty()) {
@@ -282,6 +318,7 @@ public class Application {
 	 * Setter for application type.
 	 * 
 	 * @param appType the appType to set.
+	 * @throws IllegalArgumentException if the application type is invalid.
 	 */
 	private void setAppType(String appType) {
 		if (appType == null || appType.isEmpty()) {
@@ -299,7 +336,7 @@ public class Application {
 			this.appType = AppType.HIRED;
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid application type.");
+			throw new IllegalArgumentException("Application cannot be created.");
 		}
 	}
 
@@ -307,8 +344,12 @@ public class Application {
 	 * Setter for application summary.
 	 * 
 	 * @param summary the summary to set.
+	 * @throws IllegalArgumentException if the summary is invalid.
 	 */
 	private void setSummary(String summary) {
+		if (summary == null || summary.isEmpty()) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 		this.summary = summary;
 	}
 
@@ -316,8 +357,12 @@ public class Application {
 	 * Setter for application reviewer.
 	 * 
 	 * @param reviewer the reviewer to set.
+	 * @throws IllegalArgumentException if the reviewer is invalid.
 	 */
 	private void setReviewer(String reviewer) {
+		if (reviewer == null || reviewer.isEmpty()) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 		this.reviewer = reviewer;
 	}
 
@@ -334,9 +379,10 @@ public class Application {
 	 * Setter for application resolution.
 	 * 
 	 * @param resolution the resolution to set.
+	 * @throws IllegalArgumentException if the resolution is invalid.
 	 */
 	private void setResolution(String resolution) {
-		if (resolution == null) {
+		if (resolution == null || resolution.isEmpty()) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 
@@ -362,9 +408,10 @@ public class Application {
 	 * Setter for notes ArrayList.
 	 * 
 	 * @param notes the notes to set.
+	 * @throws IllegalArgumentException if the notes are invalid.
 	 */
 	private void setNotes(ArrayList<String> notes) {
-		if (notes == null) {
+		if (notes == null || notes.isEmpty()) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 		this.notes = notes;
@@ -376,7 +423,11 @@ public class Application {
 	 * @return a string representation of the notes list.
 	 */
 	public String getNotesString() {
-		return null;
+		String s = "";
+		for (int i = 0; i < notes.size(); i++) {
+			s += "-" + notes.get(i) + "\n";
+		}
+		return s;
 	}
 
 	/**
@@ -388,7 +439,7 @@ public class Application {
 	public String toString() {
 		String s = "";
 		s += getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + "," + getReviewer()
-				+ isProcessed() + ",";
+				+ isProcessed() + "," + getResolution() + "\n";
 		return s;
 	}
 
@@ -396,6 +447,7 @@ public class Application {
 	 * Ensures the note is not null or an empty string.
 	 * 
 	 * @param note the note being added to the application.
+	 * @throws IllegalArgumentException if the note is invalid.
 	 */
 	private void addNote(String note) {
 		if (note == null || note.isEmpty()) {
@@ -413,27 +465,59 @@ public class Application {
 	 *                                       the current state.
 	 */
 	public void update(Command command) {
-		// Implement
+		if (command == null) {
+			throw new UnsupportedOperationException("Invalid information.");
+		}
+		state.updateState(command);
 	}
 
 	/**
 	 * Handles the review state of the application process.
 	 */
 	private class ReviewState implements AppState {
+
 		/**
 		 * Constructor for ReviewState.
 		 */
 		private ReviewState() {
-			// Implement
+			setState(REVIEW_NAME);
 		}
 
 		/**
 		 * Updates the state of the application based on the given command.
 		 * 
 		 * @param command the command being executed.
+		 * @throws UnsupportedOperationException if the Command is not valid for the
+		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			// Implement
+			if (command == null) {
+				throw new UnsupportedOperationException("Invalid information.");
+			}
+
+			switch (command.getCommand()) {
+			case ACCEPT:
+				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
+
+				setReviewer(command.getReviewerId());
+				setState(INTERVIEW_NAME);
+				addNote("[" + INTERVIEW_NAME + "]");
+				break;
+			case STANDBY:
+				setResolution(Command.R_REVCOMPLETED);
+				setState(WAITLIST_NAME);
+				addNote("[" + WAITLIST_NAME + "]");
+				break;
+			case REJECT:
+				setResolution(Command.R_REVCOMPLETED);
+				setState(CLOSED_NAME);
+				addNote("[" + CLOSED_NAME + "]");
+				break;
+			default:
+				throw new UnsupportedOperationException("Invalid information.");
+			}
 		}
 
 		/**
@@ -442,7 +526,7 @@ public class Application {
 		 * @return the state of the application.
 		 */
 		public String getStateName() {
-			return null;
+			return REVIEW_NAME;
 		}
 	}
 
@@ -450,20 +534,51 @@ public class Application {
 	 * Handles the interview state of the application process.
 	 */
 	private class InterviewState implements AppState {
+
 		/**
 		 * Constructor for InterviewState.
 		 */
 		private InterviewState() {
-			// Implement
+			setState(INTERVIEW_NAME);
 		}
 
 		/**
 		 * Updates the state of the application based on the given command.
 		 * 
 		 * @param command the command being executed.
+		 * @throws UnsupportedOperationException if the Command is not valid for the
+		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			// Implement
+			if (command == null || !isProcessed() || command.getNote().isEmpty()) {
+				throw new UnsupportedOperationException("Invalid information.");
+			}
+			switch (command.getCommand()) {
+			case ACCEPT:
+				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
+
+				setReviewer(command.getReviewerId());
+				setState(REFCHK_NAME);
+				addNote("[" + REFCHK_NAME + "]");
+				break;
+			case STANDBY:
+				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
+				setResolution(Command.R_INTCOMPLETED);
+				setState(WAITLIST_NAME);
+				addNote("[" + WAITLIST_NAME + "]");
+				break;
+			case REJECT:
+				setResolution(Command.R_INTCOMPLETED);
+				setState(CLOSED_NAME);
+				addNote("[" + CLOSED_NAME + "]");
+				break;
+			default:
+				throw new UnsupportedOperationException("Invalid information.");
+			}
 		}
 
 		/**
@@ -472,7 +587,7 @@ public class Application {
 		 * @return the state of the application.
 		 */
 		public String getStateName() {
-			return null;
+			return INTERVIEW_NAME;
 		}
 	}
 
@@ -484,16 +599,38 @@ public class Application {
 		 * Constructor for WaitlistState.
 		 */
 		private WaitlistState() {
-			// Implement
+			setState(WAITLIST_NAME);
 		}
 
 		/**
 		 * Updates the state of the application based on the given command.
 		 * 
 		 * @param command the command being executed.
+		 * @throws UnsupportedOperationException if the Command is not valid for the
+		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			// Implement
+			if (command.getNote().isEmpty() || isProcessed()) {
+				throw new UnsupportedOperationException("Invalid information.");
+			}
+			switch (command.getCommand()) {
+			case REOPEN:
+				if (getResolution() == Command.R_INTCOMPLETED) {
+					if (reviewer == null || reviewer.isEmpty()) {
+						throw new UnsupportedOperationException("Invalid information.");
+					}
+					setState(REFCHK_NAME);
+					addNote("[" + REFCHK_NAME + "]");
+					break;
+				}
+				if (getResolution() == Command.R_REVCOMPLETED && getAppType() == A_NEW) {
+					setAppType(A_OLD);
+					setState(REVIEW_NAME);
+					addNote("[" + REVIEW_NAME + "]");
+				}
+			default:
+				throw new UnsupportedOperationException("Invalid information.");
+			}
 		}
 
 		/**
@@ -502,7 +639,7 @@ public class Application {
 		 * @return the state of the application.
 		 */
 		public String getStateName() {
-			return null;
+			return WAITLIST_NAME;
 		}
 	}
 
@@ -514,16 +651,34 @@ public class Application {
 		 * Constructor for RefChkState.
 		 */
 		private RefChkState() {
-			// Implement
+			setState(REFCHK_NAME);
 		}
 
 		/**
 		 * Updates the state of the application based on the given command.
 		 * 
 		 * @param command the command being executed.
+		 * @throws UnsupportedOperationException if the Command is not valid for the
+		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			// Implement
+			if (command.getNote().isEmpty() || isProcessed()) {
+				throw new UnsupportedOperationException("Invalid information.");
+			}
+			switch (command.getCommand()) {
+			case ACCEPT:
+				if (reviewer == null || reviewer.isEmpty() || !isProcessed()) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
+				setState(OFFER_NAME);
+				addNote("[" + OFFER_NAME + "]");
+			case REJECT:
+				setResolution(Command.R_REFCHKCOMPLETED);
+				setState(CLOSED_NAME);
+				addNote("[" + CLOSED_NAME + "]");
+			default:
+				throw new UnsupportedOperationException("Invalid information.");
+			}
 		}
 
 		/**
@@ -532,7 +687,7 @@ public class Application {
 		 * @return the state of the application.
 		 */
 		public String getStateName() {
-			return null;
+			return REFCHK_NAME;
 		}
 	}
 
@@ -544,16 +699,35 @@ public class Application {
 		 * Constructor for OfferState.
 		 */
 		private OfferState() {
-			// Implement
+			setState(OFFER_NAME);
 		}
 
 		/**
 		 * Updates the state of the application based on the given command.
 		 * 
 		 * @param command the command being executed.
+		 * @throws UnsupportedOperationException if the Command is not valid for the
+		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			// Implement
+			if (command.getNote().isEmpty()) {
+				throw new UnsupportedOperationException("Invalid information.");
+			}
+			switch (command.getCommand()) {
+			case ACCEPT:
+				if (reviewer == null || !isProcessed()) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
+				setResolution(Command.R_OFFERCOMPLETED);
+				setState(CLOSED_NAME);
+				addNote("[" + CLOSED_NAME + "]");
+			case REJECT:
+				setResolution(Command.R_OFFERCOMPLETED);
+				setState(CLOSED_NAME);
+				addNote("[" + CLOSED_NAME + "]");
+			default:
+				throw new UnsupportedOperationException("Invalid information.");
+			}
 		}
 
 		/**
@@ -562,7 +736,7 @@ public class Application {
 		 * @return the state of the application.
 		 */
 		public String getStateName() {
-			return null;
+			return OFFER_NAME;
 		}
 	}
 
@@ -574,16 +748,34 @@ public class Application {
 		 * Constructor for ClosedState.
 		 */
 		private ClosedState() {
-			// Implement
+			setState(CLOSED_NAME);
 		}
 
 		/**
 		 * Updates the state of the application based on the given command.
 		 * 
 		 * @param command the command being executed.
+		 * @throws UnsupportedOperationException if the Command is not valid for the
+		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			// Implement
+			if (command.getNote().isEmpty()) {
+				throw new UnsupportedOperationException("Invalid information.");
+			}
+			switch (command.getCommand()) {
+			case REOPEN:
+				if (getAppType() == A_NEW && getResolution() == Command.R_REVCOMPLETED) {
+					setAppType(A_OLD);
+					setState(REVIEW_NAME);
+					addNote("[" + REVIEW_NAME + "]");
+
+				}
+				if (getAppType() == A_OLD || getResolution() != Command.R_REVCOMPLETED) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
+			default:
+				throw new UnsupportedOperationException("Invalid information.");
+			}
 		}
 
 		/**
@@ -592,16 +784,7 @@ public class Application {
 		 * @return the state of the application.
 		 */
 		public String getStateName() {
-			return null;
+			return CLOSED_NAME;
 		}
-	}
-
-	/**
-	 * Getter for the current state of the application.
-	 * 
-	 * @return the state of the application.
-	 */
-	public String getStateName() {
-		return null;
 	}
 }

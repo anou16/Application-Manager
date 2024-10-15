@@ -1,6 +1,9 @@
 package edu.ncsu.csc216.app_manager.model.io;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import edu.ncsu.csc216.app_manager.model.application.Application;
 
@@ -19,7 +22,27 @@ public class AppReader {
 	 *                                  during processing occurs.
 	 */
 	public static ArrayList<Application> readAppsFromFile(String filename) {
-		return null;
+		ArrayList<Application> application = new ArrayList<Application>();
+		String s = "";
+		try {
+			Scanner fileReader = new Scanner(new FileInputStream(filename));
+
+			while (fileReader.hasNextLine()) {
+				s += fileReader.nextLine() + "\n";
+			}
+			fileReader.close();
+			String[] appStrings = s.toString().split("\\r?\\n?[*]");
+
+			for (String appString : appStrings) {
+				if (!appString.trim().isEmpty()) {
+					application.add(processApp(appString));
+				}
+			}
+
+			return application;
+		} catch (FileNotFoundException e) {
+			throw new IllegalArgumentException("Unable to load file.");
+		}
 	}
 
 	/**
@@ -30,7 +53,49 @@ public class AppReader {
 	 * @return Application the application after processing is complete
 	 * @throws IOException if there is an issue processing the file
 	 */
-	private Application processApp(String filename) {
-		return null;
+	private static Application processApp(String line) {
+		String[] appLines = line.split("\\r?\\n?[-]");
+		String[] appParams = appLines[0].split(",");
+
+		if (appLines.length < 6) {
+			throw new IllegalArgumentException("Unable to load file.");
+		}
+
+		int id;
+		String state;
+		String appType;
+		String summary;
+		String reviewer = "";
+		boolean processPaperwork;
+		String resolution = "";
+		ArrayList<String> notes = new ArrayList<>();
+
+		try {
+			id = Integer.parseInt(appParams[0]);
+			state = appParams[1];
+			appType = appParams[2];
+			summary = appParams[3];
+			if (appParams[4].isBlank() || appParams[4] == null) {
+				reviewer = null;
+			} else {
+				reviewer = appParams[4].trim();
+			}
+			processPaperwork = Boolean.parseBoolean(appParams[5]);
+			if (appParams.length == 7) {
+				if (appParams[6].isBlank() || appParams[6].isEmpty()) {
+					resolution = null;
+				} else {
+					resolution = appParams[6];
+				}
+			}
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Unable to load file.");
+		}
+
+		for (int i = 1; i < appLines.length; i++) {
+			notes.add(appLines[i].trim());
+		}
+
+		return new Application(id, state, appType, summary, reviewer, processPaperwork, resolution, notes);
 	}
 }

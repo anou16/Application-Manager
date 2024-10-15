@@ -173,21 +173,7 @@ public class Application {
 	 * @throws IllegalArgumentException if the state is invalid.
 	 */
 	public String getState() {
-		if (state instanceof ReviewState) {
-			return REVIEW_NAME;
-		} else if (state instanceof InterviewState) {
-			return INTERVIEW_NAME;
-		} else if (state instanceof WaitlistState) {
-			return WAITLIST_NAME;
-		} else if (state instanceof RefChkState) {
-			return REFCHK_NAME;
-		} else if (state instanceof OfferState) {
-			return OFFER_NAME;
-		} else if (state instanceof ClosedState) {
-			return CLOSED_NAME;
-		} else {
-			throw new IllegalArgumentException("Application cannot be created.");
-		}
+		return getStateName();
 	}
 
 	/**
@@ -469,6 +455,29 @@ public class Application {
 			throw new UnsupportedOperationException("Invalid information.");
 		}
 		state.updateState(command);
+	}
+
+	/**
+	 * Returns application state as a String.
+	 * 
+	 * @return state the string representation of appState.
+	 */
+	public String getStateName() {
+		if (state instanceof ReviewState) {
+			return REVIEW_NAME;
+		} else if (state instanceof InterviewState) {
+			return INTERVIEW_NAME;
+		} else if (state instanceof WaitlistState) {
+			return WAITLIST_NAME;
+		} else if (state instanceof RefChkState) {
+			return REFCHK_NAME;
+		} else if (state instanceof OfferState) {
+			return OFFER_NAME;
+		} else if (state instanceof ClosedState) {
+			return CLOSED_NAME;
+		} else {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 	}
 
 	/**

@@ -1614,7 +1614,7 @@ public class AppManagerGUI extends JFrame implements ActionListener {
 			if (e.getSource() == btnReopen) {
 				// If application type is old and reviewer id is invalid and/or process
 				// paperwork checkbox is unchecked, show an error message
-				if (type.contentEquals(Application.A_OLD) && !chkProcessed.isSelected() || reviewerId == null) {
+				if (type.contentEquals(Application.A_OLD) && (!chkProcessed.isSelected() || reviewerId == null)) {
 					JOptionPane.showMessageDialog(AppManagerGUI.this, "Invalid information.");
 					reset = false;
 				} else if (type.contentEquals(Application.A_NEW) && chkProcessed.isSelected()) {

@@ -50,7 +50,6 @@ public class AppList {
 	 * @param appList the list of applications being added to.
 	 */
 	public void addApps(List<Application> appList) {
-		applications.clear();
 		for (Application application : appList) {
 			addApp(application);
 		}
@@ -63,17 +62,18 @@ public class AppList {
 	 */
 	private void addApp(Application application) {
 		int index = 0;
-		boolean duplicate = false;
+		boolean isDuplicate = false;
 
-		for (int i = 0; i < applications.size(); i++) {
-			if (application.getAppId() == applications.get(i).getAppId()) {
-				duplicate = true;
-			} else if (application.getAppId() > applications.get(i).getAppId()) {
-				index = i + 1;
+		for (Application app : applications) {
+			if (application.getAppId() == app.getAppId()) {
+				isDuplicate = true;
+			}
+			if (application.getAppId() > app.getAppId()) {
+				index++;
 			}
 		}
 
-		if (duplicate == false) {
+		if (isDuplicate == false) {
 			applications.add(index, application);
 			counter = applications.get(applications.size() - 1).getAppId() + 1;
 		}

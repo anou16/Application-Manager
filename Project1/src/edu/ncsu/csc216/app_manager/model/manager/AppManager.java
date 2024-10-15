@@ -3,17 +3,25 @@ package edu.ncsu.csc216.app_manager.model.manager;
 import edu.ncsu.csc216.app_manager.model.application.Application;
 import edu.ncsu.csc216.app_manager.model.application.Application.AppType;
 import edu.ncsu.csc216.app_manager.model.command.Command;
+import edu.ncsu.csc216.app_manager.model.io.AppReader;
+import edu.ncsu.csc216.app_manager.model.io.AppWriter;
 
 /**
  * The AppManager class controls the creation and modification of applications
  * and provides information to the GUI.
  */
 public class AppManager {
+
+	/** The Singleton instance for AppManager. */
+	private static AppManager instance;
+	/** A list containing applications. */
+	private AppList appList;
+
 	/**
 	 * Constructor for AppManager.
 	 */
 	private AppManager() {
-		// Implement
+		appList = new AppList();
 	}
 
 	/**
@@ -22,7 +30,10 @@ public class AppManager {
 	 * @return AppManager the instance of AppManager.
 	 */
 	public static AppManager getInstance() {
-		return null;
+		if (instance == null) {
+			instance = new AppManager();
+		}
+		return instance;
 	}
 
 	/**
@@ -31,7 +42,7 @@ public class AppManager {
 	 * @param filename the name of the file being saved to.
 	 */
 	public void saveAppsToFile(String filename) {
-		// Implement
+		AppWriter.writeAppsToFile(filename, appList.getApps());
 	}
 
 	/**
@@ -40,14 +51,14 @@ public class AppManager {
 	 * @param filename the name of the file from which applications are loaded.
 	 */
 	public void loadAppsFromFile(String filename) {
-		// Implement
+		appList.addApps(AppReader.readAppsFromFile(filename));
 	}
 
 	/**
 	 * Creates an empty list of applications.
 	 */
 	public void createNewAppList() {
-		// Implement
+		appList = new AppList();
 	}
 
 	/**
@@ -56,7 +67,18 @@ public class AppManager {
 	 * @return a 2D array representation of the application list.
 	 */
 	public Object[][] getAppListAsArray() {
-		return null;
+		if (appList == null) {
+			return new Object[0][0];
+		}
+		Object[][] appListArr = new Object[appList.getApps().size()][4];
+
+		for (int i = 0; i < appList.getApps().size(); i++) {
+			appListArr[i][0] = appList.getApps().get(i).getAppId();
+			appListArr[i][1] = appList.getApps().get(i).getState();
+			appListArr[i][2] = appList.getApps().get(i).getAppType();
+			appListArr[i][3] = appList.getApps().get(i).getSummary();
+		}
+		return appListArr;
 	}
 
 	/**
@@ -67,7 +89,23 @@ public class AppManager {
 	 * @return a 2D representation of the application list.
 	 */
 	public Object[][] getAppListAsArrayByAppType(String type) {
-		return null;
+		if (type == null) {
+			throw new IllegalArgumentException("Invalid type.");
+		}
+		if (!Application.A_NEW.equals(type) && !Application.A_OLD.equals(type) && !Application.A_HIRED.equals(type)) {
+			return new Object[0][0];
+		}
+
+		Object[][] appListArr = new Object[appList.getAppsByType(type).size()][4];
+
+		for (int i = 0; i < appList.getAppsByType(type).size(); i++) {
+			Application application = appList.getAppsByType(type).get(i);
+			appListArr[i][0] = application.getAppId();
+			appListArr[i][1] = application.getState();
+			appListArr[i][2] = application.getAppType();
+			appListArr[i][3] = application.getSummary();
+		}
+		return appListArr;
 	}
 
 	/**
@@ -77,7 +115,7 @@ public class AppManager {
 	 * @return an Application of the appropriate ID number.
 	 */
 	public Application getAppById(int id) {
-		return null;
+		return appList.getAppById(id);
 	}
 
 	/**
@@ -87,7 +125,7 @@ public class AppManager {
 	 * @param command the command to be executed on the application.
 	 */
 	public void executeCommand(int id, Command command) {
-		// Implement
+		appList.executeCommand(id, command);
 	}
 
 	/**
@@ -96,7 +134,7 @@ public class AppManager {
 	 * @param id the ID of the application being deleted.
 	 */
 	public void deleteAppById(int id) {
-		// Implement
+		appList.deleteAppById(id);
 	}
 
 	/**
@@ -107,6 +145,6 @@ public class AppManager {
 	 * @param note    the notes of the application.
 	 */
 	public void addAppToList(AppType appType, String summary, String note) {
-		// Implement
+		appList.addApp(appType, summary, note);
 	}
 }

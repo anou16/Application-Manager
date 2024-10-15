@@ -87,6 +87,7 @@ public class AppManager {
 	 * 
 	 * @param type the application type.
 	 * @return a 2D representation of the application list.
+	 * @throws IllegalArgumentException if the type is invalid.
 	 */
 	public Object[][] getAppListAsArrayByAppType(String type) {
 		if (type == null) {

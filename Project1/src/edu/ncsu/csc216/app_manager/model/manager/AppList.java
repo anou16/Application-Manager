@@ -1,4 +1,4 @@
-ackage edu.ncsu.csc216.app_manager.model.manager;
+package edu.ncsu.csc216.app_manager.model.manager;
 
 import java.util.List;
 
@@ -21,6 +21,7 @@ public class AppList {
 	 */
 	public AppList() {
 		this.counter = 0;
+
 	}
 
 	/**

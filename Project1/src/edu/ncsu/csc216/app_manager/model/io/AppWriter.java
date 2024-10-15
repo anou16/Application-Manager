@@ -1,5 +1,8 @@
 package edu.ncsu.csc216.app_manager.model.io;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import edu.ncsu.csc216.app_manager.model.application.Application;
@@ -19,6 +22,14 @@ public class AppWriter {
 	 *                                  file.
 	 */
 	public static void writeAppsToFile(String filename, List<Application> applications) {
-		// Implement
+		try {
+			PrintWriter pw = new PrintWriter(new FileWriter(filename));
+			for (Application application : applications) {
+				pw.print(application.toString());
+				pw.close();
+			}
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Unable to save file.");
+		}
 	}
 }

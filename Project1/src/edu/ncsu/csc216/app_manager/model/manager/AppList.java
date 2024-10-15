@@ -1,5 +1,6 @@
 package edu.ncsu.csc216.app_manager.model.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.ncsu.csc216.app_manager.model.application.Application;
@@ -15,12 +16,15 @@ import edu.ncsu.csc216.app_manager.model.command.Command;
 public class AppList {
 	/** Counter for generating unique application IDs. */
 	private int counter;
+	/** A list which stores applications. */
+	private ArrayList<Application> applications;
 
 	/**
 	 * Constructor for AppList.
 	 */
 	public AppList() {
-		this.counter = 0;
+		counter = 0;
+		applications = new ArrayList<Application>();
 
 	}
 
@@ -33,16 +37,23 @@ public class AppList {
 	 * @return the ID assigned to the new application.
 	 */
 	public int addApp(AppType appType, String summary, String note) {
-		return 0;
+		Application application = new Application(counter, appType, summary, note);
+		applications.add(application);
+		counter++;
+
+		return counter;
 	}
 
 	/**
-	 * Adds a list of applications to the AppList.
+	 * Adds a collection of applications to the AppList.
 	 * 
-	 * @param list the list of applications being added.
+	 * @param appList the list of applications being added to.
 	 */
-	public void addApps(List<Application> list) {
-		// Implement
+	public void addApps(List<Application> appList) {
+		applications.clear();
+		for (Application application : appList) {
+			addApp(application);
+		}
 	}
 
 	/**
@@ -51,7 +62,21 @@ public class AppList {
 	 * @param application the application being added.
 	 */
 	private void addApp(Application application) {
-		// Implement
+		int index = 0;
+		boolean duplicate = false;
+
+		for (int i = 0; i < applications.size(); i++) {
+			if (application.getAppId() == applications.get(i).getAppId()) {
+				duplicate = true;
+			} else if (application.getAppId() > applications.get(i).getAppId()) {
+				index = i + 1;
+			}
+		}
+
+		if (duplicate == false) {
+			applications.add(index, application);
+			counter = applications.get(applications.size() - 1).getAppId() + 1;
+		}
 	}
 
 	/**
@@ -60,7 +85,7 @@ public class AppList {
 	 * @return a list of applications managed by AppList.
 	 */
 	public List<Application> getApps() {
-		return null;
+		return applications;
 	}
 
 	/**
@@ -68,9 +93,21 @@ public class AppList {
 	 * 
 	 * @param type the type of applications to retrieve.
 	 * @return a list of applications of the specific type.
+	 * @throws IllegalArgumentException if the type is invalid.
 	 */
 	public List<Application> getAppsByType(String type) {
-		return null;
+		List<Application> appByType = new ArrayList<>();
+
+		if (type == null) {
+			throw new IllegalArgumentException("Invalid type.");
+		}
+
+		for (Application application : applications) {
+			if (application.getAppType().equals(type)) {
+				appByType.add(application);
+			}
+		}
+		return appByType;
 	}
 
 	/**
@@ -80,6 +117,11 @@ public class AppList {
 	 * @return the application of the specified ID.
 	 */
 	public Application getAppById(int id) {
+		for (Application application : applications) {
+			if (application.getAppId() == id) {
+				return application;
+			}
+		}
 		return null;
 	}
 
@@ -90,7 +132,10 @@ public class AppList {
 	 * @param command the command to execute on the application.
 	 */
 	public void executeCommand(int id, Command command) {
-		// Implement
+		Application application = getAppById(id);
+		if (application != null) {
+			application.update(command);
+		}
 	}
 
 	/**
@@ -99,6 +144,9 @@ public class AppList {
 	 * @param id the ID of the application to delete.
 	 */
 	public void deleteAppById(int id) {
-		// Implement
+		Application application = getAppById(id);
+		if (application != null) {
+			applications.remove(application);
+		}
 	}
 }

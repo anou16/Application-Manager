@@ -81,7 +81,7 @@ public class Command {
 			throw new IllegalArgumentException("Invalid command.");
 		}
 
-		if (note.length() == 0) {
+		if (note == null || note.isEmpty()) {
 			throw new IllegalArgumentException("Invalid command.");
 		}
 

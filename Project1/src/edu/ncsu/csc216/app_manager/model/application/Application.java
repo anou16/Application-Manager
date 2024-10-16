@@ -440,7 +440,8 @@ public class Application {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 
-		notes.add("[" + state.getStateName() + "] " + note);
+		String formatNote = "[" + state.getStateName() + "] " + note;
+		notes.add(formatNote);
 	}
 
 	/**
@@ -512,17 +513,17 @@ public class Application {
 
 				setReviewer(command.getReviewerId());
 				setState(INTERVIEW_NAME);
-				addNote("[" + INTERVIEW_NAME + "]");
+				addNote(command.getNote());
 				break;
 			case STANDBY:
 				setResolution(Command.R_REVCOMPLETED);
 				setState(WAITLIST_NAME);
-				addNote("[" + WAITLIST_NAME + "]");
+				addNote(command.getNote());
 				break;
 			case REJECT:
 				setResolution(Command.R_REVCOMPLETED);
 				setState(CLOSED_NAME);
-				addNote("[" + CLOSED_NAME + "]");
+				addNote(command.getNote());
 				break;
 			default:
 				throw new UnsupportedOperationException("Invalid information.");
@@ -570,7 +571,7 @@ public class Application {
 
 				setReviewer(command.getReviewerId());
 				setState(REFCHK_NAME);
-				addNote("[" + REFCHK_NAME + "]");
+				addNote(command.getNote());
 				break;
 			case STANDBY:
 				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
@@ -578,12 +579,12 @@ public class Application {
 				}
 				setResolution(Command.R_INTCOMPLETED);
 				setState(WAITLIST_NAME);
-				addNote("[" + WAITLIST_NAME + "]");
+				addNote(command.getNote());
 				break;
 			case REJECT:
 				setResolution(Command.R_INTCOMPLETED);
 				setState(CLOSED_NAME);
-				addNote("[" + CLOSED_NAME + "]");
+				addNote(command.getNote());
 				break;
 			default:
 				throw new UnsupportedOperationException("Invalid information.");
@@ -629,13 +630,13 @@ public class Application {
 						throw new UnsupportedOperationException("Invalid information.");
 					}
 					setState(REFCHK_NAME);
-					addNote("[" + REFCHK_NAME + "]");
+					addNote(command.getNote());
 					break;
 				}
 				if (getResolution() == Command.R_REVCOMPLETED && getAppType() == A_NEW) {
 					setAppType(A_OLD);
 					setState(REVIEW_NAME);
-					addNote("[" + REVIEW_NAME + "]");
+					addNote(command.getNote());
 				}
 			default:
 				throw new UnsupportedOperationException("Invalid information.");
@@ -680,11 +681,11 @@ public class Application {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
 				setState(OFFER_NAME);
-				addNote("[" + OFFER_NAME + "]");
+				addNote(command.getNote());
 			case REJECT:
 				setResolution(Command.R_REFCHKCOMPLETED);
 				setState(CLOSED_NAME);
-				addNote("[" + CLOSED_NAME + "]");
+				addNote(command.getNote());
 			default:
 				throw new UnsupportedOperationException("Invalid information.");
 			}
@@ -729,11 +730,11 @@ public class Application {
 				}
 				setResolution(Command.R_OFFERCOMPLETED);
 				setState(CLOSED_NAME);
-				addNote("[" + CLOSED_NAME + "]");
+				addNote(command.getNote());
 			case REJECT:
 				setResolution(Command.R_OFFERCOMPLETED);
 				setState(CLOSED_NAME);
-				addNote("[" + CLOSED_NAME + "]");
+				addNote(command.getNote());
 			default:
 				throw new UnsupportedOperationException("Invalid information.");
 			}
@@ -776,7 +777,7 @@ public class Application {
 				if (getAppType() == A_NEW && getResolution() == Command.R_REVCOMPLETED) {
 					setAppType(A_OLD);
 					setState(REVIEW_NAME);
-					addNote("[" + REVIEW_NAME + "]");
+					addNote(command.getNote());
 
 				}
 				if (getAppType() == A_OLD || getResolution() != Command.R_REVCOMPLETED) {

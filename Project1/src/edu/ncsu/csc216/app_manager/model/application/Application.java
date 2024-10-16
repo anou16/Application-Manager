@@ -124,11 +124,19 @@ public class Application {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 
-		this.appId = id;
+		setAppId(id);
+		setState(REVIEW_NAME);
 		this.appType = appType;
-		this.summary = summary;
-		this.notes = new ArrayList<>();
-		this.notes.add(note);
+		setAppType(getAppType());
+		setSummary(summary);
+
+		this.reviewer = null;
+		this.processPaperwork = false;
+		this.resolution = null;
+
+		this.notes = new ArrayList<String>();
+		addNote(note);
+
 	}
 
 	/**

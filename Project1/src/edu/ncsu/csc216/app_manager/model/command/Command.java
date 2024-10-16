@@ -50,7 +50,7 @@ public class Command {
 	/** "ReviewCompleted" resolution */
 	public static final String R_REVCOMPLETED = "ReviewCompleted";
 	/** "InterviewCompleted resolution */
-	public static final String R_INTCOMPLETED = "InterviewCoompleted";
+	public static final String R_INTCOMPLETED = "InterviewCompleted";
 	/** "ReferenceCheckCompleted" resolution */
 	public static final String R_REFCHKCOMPLETED = "ReferenceCheckCompleted";
 	/** "OfferCompleted" resolution */
@@ -77,7 +77,7 @@ public class Command {
 			throw new IllegalArgumentException("Invalid command.");
 		}
 
-		if (c == CommandValue.STANDBY || c == CommandValue.REJECT && r == null) {
+		if ((c == CommandValue.STANDBY || c == CommandValue.REJECT) && r == null) {
 			throw new IllegalArgumentException("Invalid command.");
 		}
 

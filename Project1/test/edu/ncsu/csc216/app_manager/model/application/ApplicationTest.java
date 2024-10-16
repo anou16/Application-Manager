@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import edu.ncsu.csc216.app_manager.model.application.Application.AppType;
 import edu.ncsu.csc216.app_manager.model.command.Command;
 import edu.ncsu.csc216.app_manager.model.command.Command.CommandValue;
+import edu.ncsu.csc216.app_manager.model.command.Command.Resolution;
 
 /**
  * Tests the Application class
@@ -36,7 +37,7 @@ class ApplicationTest {
 		assertEquals(1, application.getAppId());
 		assertEquals("New", application.getAppType());
 		assertEquals("Summary", application.getSummary());
-		assertEquals("Note 1", application.getNotes().get(0));
+		assertEquals("[Review] Note 1", application.getNotes().get(0));
 
 		Exception e1 = assertThrows(IllegalArgumentException.class, () -> new Application(-1, null, null, null));
 		assertEquals(e1.getMessage(), "Application cannot be created.");
@@ -75,15 +76,15 @@ class ApplicationTest {
 	void testReviewAcceptUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-
 		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false,
 				Command.R_REVCOMPLETED, notes);
+
 		assertEquals("Review", application.getStateName());
 
 		Command acceptCommand = new Command(Command.CommandValue.ACCEPT, "reviewer", null, "note");
 		application.update(acceptCommand);
 		assertEquals("Interview", application.getState());
-		assertEquals("-[Review] Note 1\n-[Interview] note\n", application.getNotesString());
+		assertEquals("-Note 1\n-[Interview] note\n", application.getNotesString());
 	}
 
 	/**
@@ -92,98 +93,75 @@ class ApplicationTest {
 	@Test
 	void testReviewStandbyUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
 		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false,
 				Command.R_REVCOMPLETED, notes);
 
-		Command standbyCommand = new Command(Command.CommandValue.STANDBY, null, null, "Standby note");
-		application.update(standbyCommand);
+		assertEquals("Review", application.getStateName());
 
-		assertEquals("Waitlist", application.getStateName());
-		assertEquals("-[Waitlist] Standby note\n", application.getNotesString());
+		Command acceptCommand = new Command(Command.CommandValue.STANDBY, "reviewer", Resolution.REVCOMPLETED, "note");
+		application.update(acceptCommand);
+		assertEquals("ReviewCompleted", application.getResolution());
+		assertEquals("Waitlist", application.getState());
+		assertEquals("-Note 1\n-[Waitlist] note\n", application.getNotesString());
 	}
 
 	/**
-	 * Tests the update state method with the reject command for review state.
+	 * Tests the update state method with the standby command for review state.
 	 */
 	@Test
 	void testReviewRejectUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
 		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false,
 				Command.R_REVCOMPLETED, notes);
 
-		Command rejectCommand = new Command(Command.CommandValue.REJECT, null, null, "Reject note");
-		application.update(rejectCommand);
+		assertEquals("Review", application.getStateName());
 
-		assertEquals("Closed", application.getStateName());
-		assertEquals("-[Closed] Reject note\n", application.getNotesString());
-	}
-
-	/**
-	 * Tests an invalid command.
-	 */
-	@Test
-	void testInvalidAcceptAndNullReviewer() {
-		ArrayList<String> notes = new ArrayList<>();
-		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false,
-				Command.R_REVCOMPLETED, notes);
-		Command acceptCommand = new Command(Command.CommandValue.ACCEPT, null, null, "Note");
-
-		Exception exception = assertThrows(UnsupportedOperationException.class, () -> {
-			application.update(acceptCommand);
-		});
-		assertEquals("Invalid information.", exception.getMessage());
-	}
-
-	/**
-	 * Tests the accept command for interview state.
-	 */
-	@Test
-	void testAcceptInterviewState() {
-		ArrayList<String> notes = new ArrayList<>();
-		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false,
-				Command.R_REVCOMPLETED, notes);
-		application.update(new Command(Command.CommandValue.ACCEPT, "reviewer", null, "Accept note"));
-
-		Command acceptCommand = new Command(Command.CommandValue.ACCEPT, "reviewer", null, "Accept note");
+		Command acceptCommand = new Command(Command.CommandValue.REJECT, "reviewer", Resolution.REVCOMPLETED, "note");
 		application.update(acceptCommand);
-
-		assertEquals("Reference Check", application.getStateName());
-		assertEquals("-[Reference Check] Accept note\n", application.getNotesString());
+		assertEquals("ReviewCompleted", application.getResolution());
+		assertEquals("Closed", application.getState());
+		assertEquals("-Note 1\n-[Closed] note\n", application.getNotesString());
 	}
 
 	/**
-	 * Tests the reject command for interview state.
+	 * Tests the update state method with the accept command for interview state.
 	 */
 	@Test
-	void testRejectInterviewState() {
-		ArrayList<String> notes = new ArrayList<>();
-		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false,
-				Command.R_REVCOMPLETED, notes);
-		application.update(new Command(Command.CommandValue.ACCEPT, "reviewer", null, "Note"));
-
-		Command rejectCommand = new Command(Command.CommandValue.REJECT, null, null, "Reject note");
-		application.update(rejectCommand);
-
-		assertEquals("Closed", application.getStateName());
-		assertEquals("-[Closed] Reject note\n", application.getNotesString());
-	}
-
-	/**
-	 * Tests the update state method for wait list state.
-	 */
-	@Test
-	void testRefChkUpdate() {
+	void testInterviewAcceptUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-
-		application = new Application(1, Application.WAITLIST_NAME, Application.A_OLD, "Summary", "Reviewer", false,
+		application = new Application(1, Application.INTERVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
 				Command.R_REVCOMPLETED, notes);
-		assertEquals("Waitlist", application.getStateName());
 
-		Command acceptCommand = new Command(Command.CommandValue.ACCEPT, "reviewer", null, "note");
+		assertEquals("Interview", application.getStateName());
+
+		Command acceptCommand = new Command(Command.CommandValue.ACCEPT, "reviewer", Resolution.REVCOMPLETED, "note");
 		application.update(acceptCommand);
+		assertEquals("reviewer", application.getReviewer());
+		assertEquals("RefCheck", application.getState());
+		assertEquals("-Note 1\n-[RefCheck] note\n", application.getNotesString());
+	}
+
+	/**
+	 * Tests the update state method with the standby command for interview state.
+	 */
+	@Test
+	void testInterviewStandbyUpdate() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
+		application = new Application(1, Application.INTERVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
+				Command.R_REVCOMPLETED, notes);
+
+		assertEquals("Interview", application.getStateName());
+
+		Command acceptCommand = new Command(Command.CommandValue.STANDBY, "reviewer", Resolution.REVCOMPLETED, "note");
+		application.update(acceptCommand);
+		assertEquals("InterviewCompleted", application.getResolution());
+		assertEquals("Reviewer", application.getReviewer());
 		assertEquals("Waitlist", application.getState());
-		assertEquals("-[Review] Note 1\n-[Interview] note\n", application.getNotesString());
+		assertEquals("-Note 1\n-[Waitlist] note\n", application.getNotesString());
 	}
 
 }

@@ -59,13 +59,13 @@ public class Command {
 	/**
 	 * Constructor for Command which allows application transitions to update.
 	 * 
-	 * @param commandValue the desired command for the application. Either ACCEPT,
-	 *                     REJECT, STANDBY, or REOPEN.
-	 * @param reviewerId   the application's individual ID.
-	 * @param resolution   the resolution of the application. Either Review
-	 *                     Completed, Interview Completed, Reference Check
-	 *                     Completed, or Offer Completed.
-	 * @param note         the application's added note.
+	 * @param c          the desired command for the application. Either ACCEPT,
+	 *                   REJECT, STANDBY, or REOPEN.
+	 * @param reviewerId the application's individual ID.
+	 * @param r          the resolution of the application. Either Review Completed,
+	 *                   Interview Completed, Reference Check Completed, or Offer
+	 *                   Completed.
+	 * @param note       the application's added note.
 	 * @throws IllegalArgumentException if the command has an invalid parameter.
 	 */
 	public Command(CommandValue c, String reviewerId, Resolution r, String note) {

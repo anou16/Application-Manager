@@ -634,6 +634,7 @@ public class Application {
 					setAppType(A_OLD);
 					setState(REVIEW_NAME);
 					addNote(command.getNote());
+					break;
 				}
 			default:
 				throw new UnsupportedOperationException("Invalid information.");
@@ -674,15 +675,17 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				if (reviewer == null || reviewer.isEmpty() || !isProcessed()) {
+				if (reviewer == null || reviewer.isEmpty() || isProcessed()) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
 				setState(OFFER_NAME);
 				addNote(command.getNote());
+				break;
 			case REJECT:
 				setResolution(Command.R_REFCHKCOMPLETED);
 				setState(CLOSED_NAME);
 				addNote(command.getNote());
+				break;
 			default:
 				throw new UnsupportedOperationException("Invalid information.");
 			}
@@ -728,10 +731,12 @@ public class Application {
 				setResolution(Command.R_OFFERCOMPLETED);
 				setState(CLOSED_NAME);
 				addNote(command.getNote());
+				break;
 			case REJECT:
 				setResolution(Command.R_OFFERCOMPLETED);
 				setState(CLOSED_NAME);
 				addNote(command.getNote());
+				break;
 			default:
 				throw new UnsupportedOperationException("Invalid information.");
 			}
@@ -776,10 +781,10 @@ public class Application {
 					setState(REVIEW_NAME);
 					addNote(command.getNote());
 
-				}
-				if (getAppType() == A_OLD || getResolution() != Command.R_REVCOMPLETED) {
+				} else if (getAppType() == A_OLD || getResolution() != Command.R_REVCOMPLETED) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
+				break;
 			default:
 				throw new UnsupportedOperationException("Invalid information.");
 			}

@@ -161,4 +161,108 @@ class ApplicationTest {
 		assertEquals("Waitlist", application.getState());
 		assertEquals("-Note 1\n-[Waitlist] note\n", application.getNotesString());
 	}
+
+	/**
+	 * Tests the update state method with the reject command for interview state.
+	 */
+	@Test
+	void testInterviewRejectUpdate() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
+		application = new Application(1, Application.INTERVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
+				Command.R_REVCOMPLETED, notes);
+
+		assertEquals("Interview", application.getStateName());
+
+		Command acceptCommand = new Command(Command.CommandValue.REJECT, "reviewer", Resolution.REVCOMPLETED, "note");
+		application.update(acceptCommand);
+		assertEquals("InterviewCompleted", application.getResolution());
+		assertEquals("Closed", application.getState());
+		assertEquals("-Note 1\n-[Closed] note\n", application.getNotesString());
+	}
+
+	/**
+	 * Tests the update state method with the reopen command for wait list state.
+	 */
+	@Test
+	void testClosedReopenUpdate() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
+		application = new Application(1, Application.CLOSED_NAME, Application.A_NEW, "Summary", "Reviewer", false,
+				Command.R_REVCOMPLETED, notes);
+
+		assertEquals("Closed", application.getStateName());
+
+		Command acceptCommand = new Command(Command.CommandValue.REOPEN, "Reviewer", Resolution.REVCOMPLETED, "note");
+
+		application.update(acceptCommand);
+		assertEquals("ReviewCompleted", application.getResolution());
+		assertEquals("Old", application.getAppType());
+		assertEquals("Review", application.getState());
+		assertEquals("-Note 1\n-[Review] note\n", application.getNotesString());
+	}
+
+	/**
+	 * Tests the update state method with the reopen command for wait list state.
+	 */
+	@Test
+	void testWaitlistReopenUpdate() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
+		application = new Application(1, Application.WAITLIST_NAME, Application.A_NEW, "Summary", "Reviewer", false,
+				Command.R_REVCOMPLETED, notes);
+
+		assertEquals("Waitlist", application.getStateName());
+
+		Command acceptCommand = new Command(Command.CommandValue.REOPEN, "Reviewer", Resolution.REVCOMPLETED, "note");
+
+		application.update(acceptCommand);
+		assertEquals("ReviewCompleted", application.getResolution());
+		assertEquals("Old", application.getAppType());
+		assertEquals("Review", application.getState());
+		assertEquals("-Note 1\n-[Review] note\n", application.getNotesString());
+	}
+
+	/**
+	 * Tests the update state method with the accept command for reference check
+	 * state.
+	 */
+	@Test
+	void testRefChkAcceptUpdate() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
+		application = new Application(1, Application.REFCHK_NAME, Application.A_NEW, "Summary", "Reviewer", false,
+				Command.R_REVCOMPLETED, notes);
+
+		assertEquals("RefCheck", application.getStateName());
+
+		Command acceptCommand = new Command(Command.CommandValue.ACCEPT, "Reviewer", Resolution.REVCOMPLETED, "note");
+
+		application.update(acceptCommand);
+		assertEquals("ReviewCompleted", application.getResolution());
+		assertEquals("New", application.getAppType());
+		assertEquals("Offer", application.getState());
+		assertEquals("-Note 1\n-[Offer] note\n", application.getNotesString());
+	}
+
+	/**
+	 * Tests the update state method with the accept command for offer state.
+	 */
+	@Test
+	void testOfferAcceptUpdate() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
+		application = new Application(1, Application.OFFER_NAME, Application.A_NEW, "Summary", "Reviewer", true,
+				Command.R_REVCOMPLETED, notes);
+
+		assertEquals("Offer", application.getStateName());
+
+		Command acceptCommand = new Command(Command.CommandValue.ACCEPT, "Reviewer", Resolution.REVCOMPLETED, "note");
+
+		application.update(acceptCommand);
+		assertEquals("OfferCompleted", application.getResolution());
+		assertEquals("New", application.getAppType());
+		assertEquals("Closed", application.getState());
+		assertEquals("-Note 1\n-[Closed] note\n", application.getNotesString());
+	}
 }

@@ -48,7 +48,7 @@ public class AppReader {
 	 * Helper method used to process application string and create an Application
 	 * object.
 	 * 
-	 * @param filename the file being processed
+	 * @param line the line being processed
 	 * @return Application the application after processing is complete
 	 * @throws IOException if there is an issue processing the file
 	 */

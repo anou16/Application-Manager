@@ -46,6 +46,7 @@ public class AppList {
 
 	/**
 	 * Adds a collection of applications to the AppList.
+	 * 
 	 * @param appList the list of applications being added to.
 	 */
 	public void addApps(List<Application> appList) {
@@ -72,7 +73,7 @@ public class AppList {
 			}
 		}
 
-		if (isDuplicate == false) {
+		if (!isDuplicate) {
 			applications.add(index, application);
 			counter = applications.get(applications.size() - 1).getAppId() + 1;
 		}

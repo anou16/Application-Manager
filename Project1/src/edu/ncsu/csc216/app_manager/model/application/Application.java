@@ -150,7 +150,6 @@ public class Application {
 	 * @param confirmed  whether the paperwork has been processed.
 	 * @param resolution the application resolution
 	 * @param notes      the notes to be added to the application
-	 * @throws IllegalArgumentException if the Application cannot be created
 	 */
 	public Application(int id, String state, String appType, String summary, String reviewer, boolean confirmed,
 			String resolution, ArrayList<String> notes) {
@@ -351,12 +350,8 @@ public class Application {
 	 * Setter for application reviewer.
 	 * 
 	 * @param reviewer the reviewer to set.
-	 * @throws IllegalArgumentException if the reviewer is invalid.
 	 */
 	private void setReviewer(String reviewer) {
-		if (reviewer == null || reviewer.isEmpty()) {
-//			throw new IllegalArgumentException("Application cannot be created.");
-		}
 		this.reviewer = reviewer;
 	}
 
@@ -373,13 +368,8 @@ public class Application {
 	 * Setter for application resolution.
 	 * 
 	 * @param resolution the resolution to set.
-	 * @throws IllegalArgumentException if the resolution is invalid.
 	 */
 	private void setResolution(String resolution) {
-		if (resolution == null || resolution.isEmpty()) {
-//			throw new IllegalArgumentException("Application cannot be created.");
-		}
-
 		switch (resolution) {
 		case Command.R_REVCOMPLETED:
 			this.resolution = Resolution.REVCOMPLETED;
@@ -394,7 +384,6 @@ public class Application {
 			this.resolution = Resolution.OFFERCOMPLETED;
 			break;
 		default:
-//			throw new IllegalArgumentException("Application cannot be created.");
 			this.resolution = null;
 		}
 	}

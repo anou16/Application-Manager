@@ -8,7 +8,7 @@ import java.util.Scanner;
 import edu.ncsu.csc216.app_manager.model.application.Application;
 
 /**
- * Manages file input and reading/processing a given Application file.
+ * Manages file input and reading/processing for a given Application file.
  * 
  * @author Anoushka Piduru
  */
@@ -34,11 +34,10 @@ public class AppReader {
 			String[] appStrings = s.toString().split("\\r?\\n?[*]");
 
 			for (String appString : appStrings) {
-				if (!appString.trim().isEmpty()) {
+				if (!appString.isEmpty()) {
 					application.add(processApp(appString));
 				}
 			}
-
 			return application;
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Unable to load file.");
@@ -57,7 +56,7 @@ public class AppReader {
 		String[] appLines = line.split("\\r?\\n?[-]");
 		String[] appParams = appLines[0].split(",");
 
-		if (appLines.length < 6) {
+		if (appParams.length < 6) {
 			throw new IllegalArgumentException("Unable to load file.");
 		}
 
@@ -95,7 +94,6 @@ public class AppReader {
 		for (int i = 1; i < appLines.length; i++) {
 			notes.add(appLines[i].trim());
 		}
-
 		return new Application(id, state, appType, summary, reviewer, processPaperwork, resolution, notes);
 	}
 }

@@ -24,6 +24,7 @@ public class AppWriter {
 	public static void writeAppsToFile(String filename, List<Application> applications) {
 		try {
 			PrintWriter pw = new PrintWriter(new FileWriter(filename));
+
 			for (Application application : applications) {
 				pw.print(application.toString());
 				pw.close();

@@ -163,5 +163,4 @@ class ApplicationTest {
 		assertEquals("Waitlist", application.getState());
 		assertEquals("-Note 1\n-[Waitlist] note\n", application.getNotesString());
 	}
-
 }

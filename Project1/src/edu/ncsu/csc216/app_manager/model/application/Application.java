@@ -136,7 +136,6 @@ public class Application {
 
 		this.notes = new ArrayList<String>();
 		addNote(note);
-
 	}
 
 	/**
@@ -148,7 +147,7 @@ public class Application {
 	 * @param appType    the type of application
 	 * @param summary    the summary information of the application
 	 * @param reviewer   the application reviewer
-	 * @param confirmed  ...
+	 * @param confirmed  whether the paperwork has been processed.
 	 * @param resolution the application resolution
 	 * @param notes      the notes to be added to the application
 	 * @throws IllegalArgumentException if the Application cannot be created
@@ -178,7 +177,6 @@ public class Application {
 	 * Getter for application state.
 	 * 
 	 * @return state the application state.
-	 * @throws IllegalArgumentException if the state is invalid.
 	 */
 	public String getState() {
 		return getStateName();
@@ -246,6 +244,8 @@ public class Application {
 			return Command.R_REFCHKCOMPLETED;
 		case Resolution.OFFERCOMPLETED:
 			return Command.R_OFFERCOMPLETED;
+		case null:
+			return null;
 		default:
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
@@ -355,7 +355,7 @@ public class Application {
 	 */
 	private void setReviewer(String reviewer) {
 		if (reviewer == null || reviewer.isEmpty()) {
-			throw new IllegalArgumentException("Application cannot be created.");
+//			throw new IllegalArgumentException("Application cannot be created.");
 		}
 		this.reviewer = reviewer;
 	}
@@ -377,7 +377,7 @@ public class Application {
 	 */
 	private void setResolution(String resolution) {
 		if (resolution == null || resolution.isEmpty()) {
-			throw new IllegalArgumentException("Application cannot be created.");
+//			throw new IllegalArgumentException("Application cannot be created.");
 		}
 
 		switch (resolution) {
@@ -394,7 +394,8 @@ public class Application {
 			this.resolution = Resolution.OFFERCOMPLETED;
 			break;
 		default:
-			throw new IllegalArgumentException("Application cannot be created.");
+//			throw new IllegalArgumentException("Application cannot be created.");
+			this.resolution = null;
 		}
 	}
 
@@ -470,6 +471,7 @@ public class Application {
 	 * Returns application state as a String.
 	 * 
 	 * @return state the string representation of appState.
+	 * @throws IllegalArgumentException if the state is invalid.
 	 */
 	public String getStateName() {
 		if (state instanceof ReviewState) {
@@ -518,7 +520,6 @@ public class Application {
 				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
-
 				setReviewer(command.getReviewerId());
 				setState(INTERVIEW_NAME);
 				addNote(command.getNote());
@@ -576,7 +577,6 @@ public class Application {
 				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
-
 				setReviewer(command.getReviewerId());
 				setState(REFCHK_NAME);
 				addNote(command.getNote());

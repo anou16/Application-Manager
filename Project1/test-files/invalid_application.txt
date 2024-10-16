@@ -1,0 +1,23 @@
+*-,Review,Old,Application summary,,false,
+-[Revote 1
+*3,Interview,Old,Application summary,reviewer,false,
+-[Reviee 1
+-[Interview] Note 2
+that goes on a new line
+*7,RefCheck,Old,Application swer,true,
+-[Review] Note 1
+-[Interview] Note 2
+-[RefCheck] Note 3
+*14,Waitlist,Nry,,false,ReviewCompleted
+-[Review] Note 1
+-[Waitlist] Note 2
+that goes on a new line
+*16,Offer,Old,Application sumue,
+-[Review] Note 1
+that goes new line
+-[Interview] Note 2
+-[RefCheck] Note 3
+-[Offer] Note 4iewer,true,OfferCompleted
+-[Review] Note 1
+that goes on a new line
+-[Intote 6

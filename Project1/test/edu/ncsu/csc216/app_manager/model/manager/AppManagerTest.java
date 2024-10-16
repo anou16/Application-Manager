@@ -3,9 +3,12 @@
  */
 package edu.ncsu.csc216.app_manager.model.manager;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
+
+import edu.ncsu.csc216.app_manager.model.application.Application.AppType;
 
 /**
  * Tests the AppManager class.
@@ -14,181 +17,56 @@ import org.junit.jupiter.api.Test;
  */
 class AppManagerTest {
 
+	/** The Singleton instance of AppManager. */
+	private AppManager appManager;
+
 	/**
-	 * Test method for
-	 * {@link edu.ncsu.csc216.app_manager.model.manager.AppManager#getInstance()}.
+	 * Tests getting the application list as an array.
 	 */
 	@Test
-	void testGetInstance() {
-		fail("Not yet implemented"); // TODO
+	void testAppListAsArray() {
+		appManager = AppManager.getInstance();
+		appManager.createNewAppList();
+
+		appManager.addAppToList(AppType.NEW, "Summary", "Note");
+		Object[][] arr = appManager.getAppListAsArray();
+
+		assertEquals(1, arr[0][0]);
+		assertEquals("Review", arr[0][1]);
+		assertEquals("New", arr[0][2]);
+		assertEquals("Summary", arr[0][3]);
 	}
 
 	/**
-	 * Test method for
-	 * {@link edu.ncsu.csc216.app_manager.model.manager.AppManager#loadAppsFromFile(java.lang.String)}.
+	 * Tests getting the application list sorted by type as an array.
 	 */
 	@Test
-	void testLoadAppsFromFile() {
-		fail("Not yet implemented"); // TODO
-	}
+	void testAppListAsArrayByType() {
+		AppManager.getInstance().addAppToList(AppType.NEW, "Summary", "Note");
+		AppManager.getInstance().addAppToList(AppType.OLD, "Summary 2", "Note 2");
+		AppManager.getInstance().addAppToList(AppType.NEW, "Summary 3", "Note 3");
+		AppManager.getInstance().addAppToList(AppType.OLD, "Summary 4", "Note 4");
+		AppManager.getInstance().addAppToList(AppType.OLD, "Summary 5", "Note 5");
+		AppManager.getInstance().addAppToList(AppType.NEW, "Summary 6", "Note 6");
 
-	/**
-	 * Test method for
-	 * {@link edu.ncsu.csc216.app_manager.model.manager.AppManager#createNewAppList()}.
-	 */
-	@Test
-	void testCreateNewAppList() {
-		fail("Not yet implemented"); // TODO
-	}
+		Object[][] arr = AppManager.getInstance().getAppListAsArrayByAppType("Old");
 
-	/**
-	 * Test method for
-	 * {@link edu.ncsu.csc216.app_manager.model.manager.AppManager#getAppListAsArray()}.
-	 */
-	@Test
-	void testGetAppListAsArray() {
-		fail("Not yet implemented"); // TODO
-	}
+		assertEquals(3, arr.length);
 
-	/**
-	 * Test method for
-	 * {@link edu.ncsu.csc216.app_manager.model.manager.AppManager#getAppListAsArrayByAppType(java.lang.String)}.
-	 */
-	@Test
-	void testGetAppListAsArrayByAppType() {
-		fail("Not yet implemented"); // TODO
-	}
+		assertEquals(2, arr[0][0]);
+		assertEquals("Review", arr[0][1]);
+		assertEquals("Old", arr[0][2]);
+		assertEquals("Summary 2", arr[0][3]);
 
-	/**
-	 * Test method for
-	 * {@link edu.ncsu.csc216.app_manager.model.manager.AppManager#getAppById(int)}.
-	 */
-	@Test
-	void testGetAppById() {
-		fail("Not yet implemented"); // TODO
-	}
+		assertEquals(4, arr[1][0]);
+		assertEquals("Review", arr[1][1]);
+		assertEquals("Old", arr[1][2]);
+		assertEquals("Summary 4", arr[1][3]);
 
-	/**
-	 * Test method for
-	 * {@link edu.ncsu.csc216.app_manager.model.manager.AppManager#executeCommand(int, edu.ncsu.csc216.app_manager.model.command.Command)}.
-	 */
-	@Test
-	void testExecuteCommand() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for
-	 * {@link edu.ncsu.csc216.app_manager.model.manager.AppManager#deleteAppById(int)}.
-	 */
-	@Test
-	void testDeleteAppById() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for
-	 * {@link edu.ncsu.csc216.app_manager.model.manager.AppManager#addAppToList(edu.ncsu.csc216.app_manager.model.application.Application.AppType, java.lang.String, java.lang.String)}.
-	 */
-	@Test
-	void testAddAppToList() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#Object()}.
-	 */
-	@Test
-	void testObject() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#getClass()}.
-	 */
-	@Test
-	void testGetClass() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#hashCode()}.
-	 */
-	@Test
-	void testHashCode() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#equals(java.lang.Object)}.
-	 */
-	@Test
-	void testEquals() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#clone()}.
-	 */
-	@Test
-	void testClone() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#toString()}.
-	 */
-	@Test
-	void testToString() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#notify()}.
-	 */
-	@Test
-	void testNotify() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#notifyAll()}.
-	 */
-	@Test
-	void testNotifyAll() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#wait()}.
-	 */
-	@Test
-	void testWait() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#wait(long)}.
-	 */
-	@Test
-	void testWaitLong() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#wait(long, int)}.
-	 */
-	@Test
-	void testWaitLongInt() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link java.lang.Object#finalize()}.
-	 */
-	@Test
-	void testFinalize() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(5, arr[2][0]);
+		assertEquals("Review", arr[2][1]);
+		assertEquals("Old", arr[2][2]);
+		assertEquals("Summary 5", arr[2][3]);
 	}
 
 }

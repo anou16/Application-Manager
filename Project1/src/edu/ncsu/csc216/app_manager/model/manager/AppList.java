@@ -23,8 +23,8 @@ public class AppList {
 	 * Constructor for AppList.
 	 */
 	public AppList() {
-		counter = 0;
-		applications = new ArrayList<Application>();
+		this.counter = 0;
+		this.applications = new ArrayList<Application>();
 
 	}
 
@@ -37,16 +37,15 @@ public class AppList {
 	 * @return the ID assigned to the new application.
 	 */
 	public int addApp(AppType appType, String summary, String note) {
+		counter++;
 		Application application = new Application(counter, appType, summary, note);
 		applications.add(application);
-		counter++;
 
 		return counter;
 	}
 
 	/**
 	 * Adds a collection of applications to the AppList.
-	 * 
 	 * @param appList the list of applications being added to.
 	 */
 	public void addApps(List<Application> appList) {

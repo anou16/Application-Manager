@@ -4,7 +4,6 @@
 package edu.ncsu.csc216.app_manager.model.manager;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.List;

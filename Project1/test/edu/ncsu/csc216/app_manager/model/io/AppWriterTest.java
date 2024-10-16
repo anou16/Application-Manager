@@ -4,10 +4,8 @@
 package edu.ncsu.csc216.app_manager.model.io;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;

@@ -8,6 +8,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import edu.ncsu.csc216.app_manager.model.application.Application.AppType;
+import edu.ncsu.csc216.app_manager.model.command.Command;
+import edu.ncsu.csc216.app_manager.model.command.Command.Resolution;
 
 /**
  * Tests the AppManager class.
@@ -41,6 +43,9 @@ class AppManagerTest {
 	 */
 	@Test
 	void testAppListAsArrayByType() {
+		appManager = AppManager.getInstance();
+		appManager.createNewAppList();
+
 		AppManager.getInstance().addAppToList(AppType.NEW, "Summary", "Note");
 		AppManager.getInstance().addAppToList(AppType.OLD, "Summary 2", "Note 2");
 		AppManager.getInstance().addAppToList(AppType.NEW, "Summary 3", "Note 3");
@@ -68,4 +73,23 @@ class AppManagerTest {
 		assertEquals("Summary 5", arr[2][3]);
 	}
 
+	/**
+	 * Tests the execute command method.
+	 */
+	@Test
+	void testExecuteCommand() {
+		appManager = AppManager.getInstance();
+		appManager.createNewAppList();
+
+		appManager.addAppToList(AppType.NEW, "Summary", "Note");
+		appManager.addAppToList(AppType.NEW, "Summary", "Note");
+		appManager.addAppToList(AppType.OLD, "Summary", "Note");
+
+		Command command = new Command(Command.CommandValue.ACCEPT, "Reviewer", Resolution.REVCOMPLETED, "Note");
+		appManager.executeCommand(1, command);
+
+		assertEquals("Interview", appManager.getAppById(1).getStateName());
+		assertEquals("Summary", appManager.getAppById(1).getSummary());
+		assertEquals("New", appManager.getAppById(1).getAppType());
+	}
 }

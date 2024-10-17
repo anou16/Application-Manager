@@ -3,7 +3,10 @@
  */
 package edu.ncsu.csc216.app_manager.model.io;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import edu.ncsu.csc216.app_manager.model.application.Application;
+import edu.ncsu.csc216.app_manager.model.application.Application.AppType;
+import edu.ncsu.csc216.app_manager.model.command.Command.Resolution;
 
 /**
  * Tests the AppWriter class.
@@ -33,6 +38,20 @@ class AppWriterTest {
 
 		File filename = new File(validTest);
 		assertTrue(filename.exists());
+
+		ArrayList<String> notes = new ArrayList<>();
+		String file = "test-files/act_app_closed.txt";
+
+		notes.add("[Review] Note 1");
+		notes.add("[Interview] Note 2");
+		notes.add("[Watlist] Note 3");
+		notes.add("[RefCheck] Note 4");
+		notes.add("[Offer] Note 5");
+		notes.add("[Closed] Note 6");
+
+		apps.add(new Application(1, "Closed", "Old", "Summary", null, true, "OfferCompleted", notes));
+
+		assertDoesNotThrow(() -> AppWriter.writeAppsToFile(file, apps));
 	}
 
 	/**

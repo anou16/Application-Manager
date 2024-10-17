@@ -3,8 +3,6 @@
  */
 package edu.ncsu.csc216.app_manager.model.io;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -14,8 +12,6 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import edu.ncsu.csc216.app_manager.model.application.Application;
-import edu.ncsu.csc216.app_manager.model.application.Application.AppType;
-import edu.ncsu.csc216.app_manager.model.command.Command.Resolution;
 
 /**
  * Tests the AppWriter class.

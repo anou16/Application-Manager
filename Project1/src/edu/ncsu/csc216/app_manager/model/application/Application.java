@@ -175,7 +175,7 @@ public class Application {
 	/**
 	 * Getter for application state.
 	 * 
-	 * @return state the application state.
+	 * @return state the application state as a string.
 	 */
 	public String getState() {
 		return getStateName();
@@ -184,7 +184,7 @@ public class Application {
 	/**
 	 * Getter for application type.
 	 * 
-	 * @return appType the application type.
+	 * @return appType the application type as a string.
 	 * @throws IllegalArgumentException if the application type is invalid.
 	 */
 	public String getAppType() {
@@ -230,7 +230,7 @@ public class Application {
 	/**
 	 * Getter for application resolution.
 	 * 
-	 * @return resolution the application resolution.
+	 * @return resolution the application resolution as a string.
 	 * @throws IllegalArgumentException if the resolution is invalid.
 	 */
 	public String getResolution() {
@@ -428,7 +428,7 @@ public class Application {
 	}
 
 	/**
-	 * Ensures the note is not null or an empty string.
+	 * Adds a formatted note with an appended state name.
 	 * 
 	 * @param note the note being added to the application.
 	 * @throws IllegalArgumentException if the note is invalid.

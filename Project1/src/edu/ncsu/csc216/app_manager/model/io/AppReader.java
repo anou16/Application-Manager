@@ -33,9 +33,9 @@ public class AppReader {
 			fileReader.close();
 			String[] appStrings = s.toString().split("\\r?\\n?[*]");
 
-			for (String appString : appStrings) {
-				if (!appString.isEmpty()) {
-					application.add(processApp(appString));
+			for (String app : appStrings) {
+				if (!app.isEmpty()) {
+					application.add(processApp(app));
 				}
 			}
 			return application;
@@ -77,11 +77,11 @@ public class AppReader {
 			if (appParams[4].isBlank() || appParams[4] == null) {
 				reviewer = null;
 			} else {
-				reviewer = appParams[4].trim();
+				reviewer = appParams[4];
 			}
 			processPaperwork = Boolean.parseBoolean(appParams[5]);
 			if (appParams.length == 7) {
-				if (appParams[6].isBlank() || appParams[6].isEmpty()) {
+				if (appParams[6].isBlank() || appParams[6] == null) {
 					resolution = null;
 				} else {
 					resolution = appParams[6];
@@ -92,7 +92,7 @@ public class AppReader {
 		}
 
 		for (int i = 1; i < appLines.length; i++) {
-			notes.add(appLines[i].trim());
+			notes.add(appLines[i]);
 		}
 		return new Application(id, state, appType, summary, reviewer, processPaperwork, resolution, notes);
 	}

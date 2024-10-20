@@ -50,7 +50,8 @@ public class AppList {
 	 * @param appList the list of applications being added to.
 	 */
 	public void addApps(List<Application> appList) {
-		for (Application application : appList) {
+		for (int i = 0; i < appList.size(); i++) {
+			Application application = appList.get(i);
 			addApp(application);
 		}
 	}
@@ -64,7 +65,8 @@ public class AppList {
 		int index = 0;
 		boolean isDuplicate = false;
 
-		for (Application app : applications) {
+		for (int i = 0; i < applications.size(); i++) {
+			Application app = applications.get(i);
 			if (application.getAppId() == app.getAppId()) {
 				isDuplicate = true;
 			}
@@ -102,7 +104,8 @@ public class AppList {
 			throw new IllegalArgumentException("Invalid type.");
 		}
 
-		for (Application application : applications) {
+		for (int i = 0; i < applications.size(); i++) {
+			Application application = applications.get(i);
 			if (application.getAppType().equals(type)) {
 				appByType.add(application);
 			}
@@ -117,7 +120,8 @@ public class AppList {
 	 * @return the application of the specified ID.
 	 */
 	public Application getAppById(int id) {
-		for (Application application : applications) {
+		for (int i = 0; i < applications.size(); i++) {
+			Application application = applications.get(i);
 			if (application.getAppId() == id) {
 				return application;
 			}

@@ -567,7 +567,8 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
+				if (getState() != INTERVIEW_NAME || command.getReviewerId() == null
+						|| command.getReviewerId().isEmpty()) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
 				setReviewer(command.getReviewerId());

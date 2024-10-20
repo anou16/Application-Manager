@@ -131,16 +131,16 @@ class ApplicationTest {
 	void testInterviewAcceptUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.INTERVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
+		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
 				Command.R_REVCOMPLETED, notes);
 
-		assertEquals("Interview", application.getStateName());
+		assertEquals("Review", application.getStateName());
 
 		Command acceptCommand = new Command(Command.CommandValue.ACCEPT, "reviewer", Resolution.REVCOMPLETED, "note");
 		application.update(acceptCommand);
 		assertEquals("reviewer", application.getReviewer());
-		assertEquals("RefCheck", application.getState());
-		assertEquals("-Note 1\n-[RefCheck] note\n", application.getNotesString());
+		assertEquals("Interview", application.getState());
+		assertEquals("-Note 1\n-[Interview] note\n", application.getNotesString());
 	}
 
 	/**
@@ -150,14 +150,14 @@ class ApplicationTest {
 	void testInterviewStandbyUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.INTERVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
+		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
 				Command.R_REVCOMPLETED, notes);
 
-		assertEquals("Interview", application.getStateName());
+		assertEquals("Review", application.getStateName());
 
 		Command acceptCommand = new Command(Command.CommandValue.STANDBY, "reviewer", Resolution.REVCOMPLETED, "note");
 		application.update(acceptCommand);
-		assertEquals("InterviewCompleted", application.getResolution());
+		assertEquals("ReviewCompleted", application.getResolution());
 		assertEquals("Reviewer", application.getReviewer());
 		assertEquals("Waitlist", application.getState());
 		assertEquals("-Note 1\n-[Waitlist] note\n", application.getNotesString());
@@ -170,14 +170,14 @@ class ApplicationTest {
 	void testInterviewRejectUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.INTERVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
+		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
 				Command.R_REVCOMPLETED, notes);
 
-		assertEquals("Interview", application.getStateName());
+		assertEquals("Review", application.getStateName());
 
 		Command acceptCommand = new Command(Command.CommandValue.REJECT, "reviewer", Resolution.REVCOMPLETED, "note");
 		application.update(acceptCommand);
-		assertEquals("InterviewCompleted", application.getResolution());
+		assertEquals("ReviewCompleted", application.getResolution());
 		assertEquals("Closed", application.getState());
 		assertEquals("-Note 1\n-[Closed] note\n", application.getNotesString());
 	}

@@ -576,9 +576,9 @@ public class Application {
 				addNote(command.getNote());
 				break;
 			case STANDBY:
-				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
-					throw new UnsupportedOperationException("Invalid information.");
-				}
+				// if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
+				// throw new UnsupportedOperationException("Invalid information.");
+				// }
 				setResolution(Command.R_INTCOMPLETED);
 				setState(WAITLIST_NAME);
 				addNote(command.getNote());

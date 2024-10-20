@@ -155,7 +155,7 @@ class ApplicationTest {
 
 		assertEquals("Interview", application.getStateName());
 
-		Command acceptCommand = new Command(Command.CommandValue.STANDBY, "reviewer", Resolution.REVCOMPLETED, "note");
+		Command acceptCommand = new Command(Command.CommandValue.STANDBY, "Reviewer", Resolution.REVCOMPLETED, "note");
 		application.update(acceptCommand);
 		assertEquals("InterviewCompleted", application.getResolution());
 		assertEquals("Reviewer", application.getReviewer());

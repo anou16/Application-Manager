@@ -370,6 +370,10 @@ public class Application {
 	 * @param resolution the resolution to set.
 	 */
 	private void setResolution(String resolution) {
+		if (resolution == null) {
+			this.resolution = null;
+			return;
+		}
 		switch (resolution) {
 		case Command.R_REVCOMPLETED:
 			this.resolution = Resolution.REVCOMPLETED;

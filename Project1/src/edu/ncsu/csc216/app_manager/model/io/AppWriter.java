@@ -3,6 +3,7 @@ package edu.ncsu.csc216.app_manager.model.io;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.ncsu.csc216.app_manager.model.application.Application;
@@ -25,10 +26,12 @@ public class AppWriter {
 		try {
 			PrintWriter pw = new PrintWriter(new FileWriter(filename));
 
-			for (Application application : applications) {
+			for (int i = 0; i < applications.size(); i++) {
+				Application application = applications.get(i);
 				pw.print(application.toString());
-				pw.close();
 			}
+			pw.close();
+
 		} catch (IOException e) {
 			throw new IllegalArgumentException("Unable to save file.");
 		}

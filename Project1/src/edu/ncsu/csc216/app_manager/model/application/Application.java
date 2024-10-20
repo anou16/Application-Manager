@@ -784,7 +784,7 @@ public class Application {
 					setAppType(A_OLD);
 					setState(REVIEW_NAME);
 					addNote(command.getNote());
-					setResolution(Command.R_REVCOMPLETED);
+					setResolution(null);
 
 				} else if (getAppType() == A_OLD || getResolution() != Command.R_REVCOMPLETED) {
 					throw new UnsupportedOperationException("Invalid information.");

@@ -568,11 +568,16 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				setReviewer(command.getReviewerId());
+				if (command.getReviewerId() != null && !command.getReviewerId().isEmpty()) {
+					setReviewer(command.getReviewerId());
+				}
 				setState(REFCHK_NAME);
 				addNote(command.getNote());
 				break;
 			case STANDBY:
+				if (command.getReviewerId() == null && command.getReviewerId().isEmpty()) {
+					throw new IllegalArgumentException("Invalid information.");
+				}
 				setReviewer(command.getReviewerId());
 				setResolution(Command.R_INTCOMPLETED);
 				setState(WAITLIST_NAME);

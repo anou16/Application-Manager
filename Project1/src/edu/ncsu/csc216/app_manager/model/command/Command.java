@@ -73,7 +73,7 @@ public class Command {
 			throw new IllegalArgumentException("Invalid command.");
 		}
 
-		if (c == CommandValue.ACCEPT && reviewerId.isEmpty()) {
+		if (c == CommandValue.ACCEPT && (reviewerId == null || reviewerId.isEmpty())) {
 			throw new IllegalArgumentException("Invalid command.");
 		}
 

@@ -3,7 +3,6 @@ package edu.ncsu.csc216.app_manager.model.io;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import edu.ncsu.csc216.app_manager.model.application.Application;

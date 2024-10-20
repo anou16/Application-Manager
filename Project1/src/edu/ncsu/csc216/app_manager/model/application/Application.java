@@ -562,7 +562,7 @@ public class Application {
 		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			if (command == null || !isProcessed() || command.getNote().isEmpty() || getState() != REVIEW_NAME) {
+			if (command == null || !isProcessed() || command.getNote().isEmpty()) {
 				throw new UnsupportedOperationException("Invalid information.");
 			}
 			switch (command.getCommand()) {

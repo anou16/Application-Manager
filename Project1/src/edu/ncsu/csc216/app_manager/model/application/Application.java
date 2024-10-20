@@ -776,12 +776,12 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case REOPEN:
-				if (getAppType() == A_NEW && getResolution() == Command.R_REVCOMPLETED) {
+				if (getAppType() == A_OLD || (getAppType() == A_NEW && getResolution() == Command.R_REVCOMPLETED)) {
 					setAppType(A_OLD);
 					setState(REVIEW_NAME);
 					addNote(command.getNote());
 
-				} else if (getAppType() == A_OLD || getResolution() != Command.R_REVCOMPLETED) {
+				} else {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
 				break;

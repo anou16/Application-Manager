@@ -571,6 +571,7 @@ public class Application {
 						|| command.getReviewerId().isEmpty()) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
+				setAppType(A_OLD);
 				setReviewer(command.getReviewerId());
 				setState(REFCHK_NAME);
 				addNote(command.getNote());

@@ -26,11 +26,11 @@ public class AppReader {
 		String s = "";
 		try {
 			Scanner scnr = new Scanner(new FileInputStream(filename));
-
 			while (scnr.hasNextLine()) {
 				s += scnr.nextLine() + "\n";
 			}
 			scnr.close();
+
 			String[] appStrings = s.toString().split("\\r?\\n?[*]");
 
 			for (String app : appStrings) {
@@ -74,13 +74,11 @@ public class AppReader {
 				resolution = null;
 			}
 		}
-
 		ArrayList<String> notes = new ArrayList<>();
 
 		try {
 			id = Integer.parseInt(appParams[0].trim());
 			processPaperwork = Boolean.parseBoolean(appParams[5]);
-
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Unable to load file.");
 		}

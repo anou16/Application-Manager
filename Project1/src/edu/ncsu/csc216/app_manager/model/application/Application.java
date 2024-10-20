@@ -244,7 +244,7 @@ public class Application {
 		case Resolution.OFFERCOMPLETED:
 			return Command.R_OFFERCOMPLETED;
 		case null:
-			return null;
+			return "null";
 		default:
 			throw new IllegalArgumentException("Application cannot be created.");
 		}

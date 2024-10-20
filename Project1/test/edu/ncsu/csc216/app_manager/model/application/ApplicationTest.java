@@ -218,7 +218,7 @@ class ApplicationTest {
 		Command acceptCommand = new Command(Command.CommandValue.REOPEN, "Reviewer", Resolution.REVCOMPLETED, "note");
 
 		application.update(acceptCommand);
-		assertEquals("ReviewCompleted", application.getResolution());
+		assertNull(application.getResolution());
 		assertEquals("Old", application.getAppType());
 		assertEquals("Review", application.getState());
 		assertEquals("-Note 1\n-[Review] note\n", application.getNotesString());

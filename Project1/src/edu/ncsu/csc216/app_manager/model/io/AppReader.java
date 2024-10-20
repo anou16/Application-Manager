@@ -75,14 +75,14 @@ public class AppReader {
 			appType = appParams[2];
 			summary = appParams[3];
 			if (appParams[4].isBlank() || appParams[4] == null) {
-				reviewer = "null";
+				reviewer = null;
 			} else {
 				reviewer = appParams[4].trim();
 			}
 			processPaperwork = Boolean.parseBoolean(appParams[5]);
 			if (appParams.length == 7) {
 				if (appParams[6].isBlank() || appParams[6] == null) {
-					resolution = "null";
+					resolution = null;
 				} else {
 					resolution = appParams[6].trim();
 				}

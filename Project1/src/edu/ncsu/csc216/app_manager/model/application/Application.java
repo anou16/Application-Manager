@@ -568,20 +568,12 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				if (command.getReviewerId() != null) {
-					setReviewer(command.getReviewerId());
-				} else {
-					setReviewer(null);
-				}
+				setReviewer(command.getReviewerId());
 				setState(REFCHK_NAME);
 				addNote(command.getNote());
 				break;
 			case STANDBY:
-				if (command.getReviewerId() != null) {
-					setReviewer(command.getReviewerId());
-				} else {
-					setReviewer(null);
-				}
+				setReviewer(command.getReviewerId());
 				setResolution(Command.R_INTCOMPLETED);
 				setState(WAITLIST_NAME);
 				addNote(command.getNote());

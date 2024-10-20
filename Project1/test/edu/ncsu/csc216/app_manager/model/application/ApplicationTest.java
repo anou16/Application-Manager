@@ -5,6 +5,7 @@ package edu.ncsu.csc216.app_manager.model.application;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -196,7 +197,7 @@ class ApplicationTest {
 		Command acceptCommand = new Command(Command.CommandValue.REOPEN, "Reviewer", Resolution.REVCOMPLETED, "note");
 
 		application.update(acceptCommand);
-		assertEquals("ReviewCompleted", application.getResolution());
+		assertNull(application.getResolution());
 		assertEquals("Old", application.getAppType());
 		assertEquals("Review", application.getState());
 		assertEquals("-Note 1\n-[Review] note\n", application.getNotesString());

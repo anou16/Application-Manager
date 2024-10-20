@@ -244,7 +244,7 @@ public class Application {
 		case Resolution.OFFERCOMPLETED:
 			return Command.R_OFFERCOMPLETED;
 		case null:
-			return "null";
+			return null;
 		default:
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
@@ -426,8 +426,14 @@ public class Application {
 	 */
 	public String toString() {
 		String s = "";
+		String resol = "";
+		if (getResolution() == null) {
+			resol += "null";
+		} else {
+			resol += getResolution();
+		}
 		s += getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + "," + getReviewer()
-				+ isProcessed() + "," + getResolution() + "\n";
+				+ isProcessed() + "," + resol + "\n";
 		return s;
 	}
 

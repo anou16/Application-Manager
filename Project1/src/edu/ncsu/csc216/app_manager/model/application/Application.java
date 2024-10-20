@@ -637,6 +637,7 @@ public class Application {
 				if (getResolution() == Command.R_REVCOMPLETED && getAppType() == A_NEW) {
 					setAppType(A_OLD);
 					setState(REVIEW_NAME);
+					setResolution(null);
 					addNote(command.getNote());
 					break;
 				}

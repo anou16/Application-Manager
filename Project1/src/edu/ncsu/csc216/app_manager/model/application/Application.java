@@ -568,17 +568,20 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				// if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
-				// throw new UnsupportedOperationException("Invalid information.");
-				// }
-				setReviewer(command.getReviewerId());
+				if (command.getReviewerId() != null) {
+					setReviewer(command.getReviewerId());
+				} else {
+					setReviewer(null);
+				}
 				setState(REFCHK_NAME);
 				addNote(command.getNote());
 				break;
 			case STANDBY:
-				// if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
-				// throw new UnsupportedOperationException("Invalid information.");
-				// }
+				if (command.getReviewerId() != null) {
+					setReviewer(command.getReviewerId());
+				} else {
+					setReviewer(null);
+				}
 				setResolution(Command.R_INTCOMPLETED);
 				setState(WAITLIST_NAME);
 				addNote(command.getNote());

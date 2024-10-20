@@ -515,6 +515,7 @@ public class Application {
 				}
 				setReviewer(command.getReviewerId());
 				setState(INTERVIEW_NAME);
+				setAppType(A_OLD);
 				addNote(command.getNote());
 				break;
 			case STANDBY:

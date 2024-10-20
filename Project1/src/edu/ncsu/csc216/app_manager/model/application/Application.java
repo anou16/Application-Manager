@@ -562,7 +562,7 @@ public class Application {
 		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			if (command == null || !isProcessed() || command.getNote().isEmpty()) {
+			if (command == null || !isProcessed() || command.getNote().isEmpty() || getState() != REVIEW_NAME) {
 				throw new UnsupportedOperationException("Invalid information.");
 			}
 			switch (command.getCommand()) {
@@ -570,7 +570,6 @@ public class Application {
 				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
-				setAppType(A_OLD);
 				setReviewer(command.getReviewerId());
 				setState(REFCHK_NAME);
 				addNote(command.getNote());

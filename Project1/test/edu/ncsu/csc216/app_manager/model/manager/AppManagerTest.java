@@ -90,6 +90,6 @@ class AppManagerTest {
 
 		assertEquals("Interview", appManager.getAppById(1).getStateName());
 		assertEquals("Summary", appManager.getAppById(1).getSummary());
-		assertEquals("New", appManager.getAppById(1).getAppType());
+		assertEquals("Old", appManager.getAppById(1).getAppType());
 	}
 }

@@ -33,9 +33,9 @@ public class AppReader {
 
 			String[] appStrings = s.toString().split("\\r?\\n?[*]");
 
-			for (String app : appStrings) {
-				if (!app.isEmpty()) {
-					application.add(processApp(app));
+			for (int i = 0; i < appStrings.length; i++) {
+				if (!appStrings[i].isEmpty()) {
+					application.add(processApp(appStrings[i]));
 				}
 			}
 			return application;

@@ -427,13 +427,19 @@ public class Application {
 	public String toString() {
 		String s = "";
 		String resol = "";
+		String review = "";
+		if (getReviewer() == null) {
+			review += "null";
+		} else {
+			review += getReviewer();
+		}
 		if (getResolution() == null) {
 			resol += "null";
 		} else {
 			resol += getResolution();
 		}
-		s += getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + "," + getReviewer()
-				+ isProcessed() + "," + resol + "\n";
+		s += getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + "," + review + isProcessed()
+				+ "," + resol + "\n";
 		return s;
 	}
 

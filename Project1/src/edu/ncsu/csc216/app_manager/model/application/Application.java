@@ -593,6 +593,8 @@ public class Application {
 			case ACCEPT:
 				if (command.getReviewerId() != null && !command.getReviewerId().isEmpty()) {
 					setReviewer(command.getReviewerId());
+				} else {
+					throw new UnsupportedOperationException("Invalid information.");
 				}
 				setState(REFCHK_NAME);
 				addNote(command.getNote());

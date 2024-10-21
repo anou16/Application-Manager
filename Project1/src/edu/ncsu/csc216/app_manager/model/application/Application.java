@@ -354,8 +354,9 @@ public class Application {
 	private void setReviewer(String reviewer) {
 		if (reviewer == null || reviewer.isEmpty()) {
 			this.reviewer = "null";
+		} else {
+			this.reviewer = reviewer;
 		}
-		this.reviewer = reviewer;
 	}
 
 	/**

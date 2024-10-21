@@ -355,7 +355,7 @@ public class Application {
 		if (reviewer != null && !reviewer.isEmpty()) {
 			this.reviewer = reviewer;
 		} else {
-			this.reviewer = "null";
+			this.reviewer = null;
 		}
 	}
 

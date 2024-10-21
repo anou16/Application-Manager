@@ -157,7 +157,12 @@ public class Application {
 		setState(state);
 		setAppType(appType);
 		setSummary(summary);
-		setReviewer(reviewer);
+
+		if (reviewer == null || reviewer.isEmpty()) {
+			setReviewer("null");
+		} else {
+			setReviewer(reviewer);
+		}
 		setProcessPaperwork(confirmed);
 		setResolution(resolution);
 		setNotes(notes);

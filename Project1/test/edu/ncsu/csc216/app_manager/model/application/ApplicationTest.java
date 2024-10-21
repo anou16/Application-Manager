@@ -263,7 +263,7 @@ class ApplicationTest {
 		application.update(acceptCommand);
 		assertEquals("OfferCompleted", application.getResolution());
 		assertEquals("New", application.getAppType());
-		assertEquals("Closed", application.getState());
-		assertEquals("-Note 1\n-[Closed] note\n", application.getNotesString());
+		assertEquals("RefCheck", application.getState());
+		assertEquals("-Note 1\n-[RefCheck] note\n", application.getNotesString());
 	}
 }

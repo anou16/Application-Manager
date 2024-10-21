@@ -440,10 +440,9 @@ public class Application {
 			s += getResolution() + "\n";
 		}
 
-		s += "-" + notes.get(0) + "\n";
-		for (int i = 1; i < notes.size(); i++) {
+		for (int i = 0; i < notes.size(); i++) {
 			String note = notes.get(i);
-			s += " -" + note + "\n";
+			s += "-" + note + "\n";
 		}
 
 		return s;

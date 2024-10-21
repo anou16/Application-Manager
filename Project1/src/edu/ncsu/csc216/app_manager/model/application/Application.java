@@ -130,9 +130,9 @@ public class Application {
 		setAppType(getAppType());
 		setSummary(summary);
 
-		// this.reviewer = null;
-		// this.processPaperwork = false;
-		// this.resolution = null;
+		this.reviewer = null;
+		this.processPaperwork = false;
+		this.resolution = null;
 
 		this.notes = new ArrayList<String>();
 		addNote(note);

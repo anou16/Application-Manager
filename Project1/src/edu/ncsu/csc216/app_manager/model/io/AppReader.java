@@ -79,7 +79,7 @@ public class AppReader {
 		try {
 			id = Integer.parseInt(appParams[0].trim());
 			processPaperwork = Boolean.parseBoolean(appParams[5]);
-		} catch (Exception e) {
+		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException("Unable to load file.");
 		}
 

@@ -439,6 +439,14 @@ public class Application {
 		} else {
 			s += getResolution() + "\n";
 		}
+
+		s += " -";
+		for (int i = 0; i < notes.size(); i++) {
+			String note = notes.get(i);
+			s += note + " ";
+		}
+
+		s += "\n";
 		return s;
 	}
 

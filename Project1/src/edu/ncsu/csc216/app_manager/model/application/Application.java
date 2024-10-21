@@ -591,14 +591,16 @@ public class Application {
 			// if (command == null || !isProcessed() || command.getNote().isEmpty()) {
 			// throw new UnsupportedOperationException("Invalid information.");
 			// }
-			if (getAppType() != A_NEW && getAppType() != A_OLD) {
-				throw new UnsupportedOperationException("Invalid information.");
-			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				setReviewer(command.getReviewerId());
-				setState(REFCHK_NAME);
-				addNote(command.getNote());
+				if (getState().equals(INTERVIEW_NAME)) {
+					setState(REFCHK_NAME);
+					addNote(command.getNote());
+				} else {
+					setReviewer(command.getReviewerId());
+					setState(INTERVIEW_NAME);
+					addNote(command.getNote());
+				}
 				break;
 			case STANDBY:
 				setReviewer(command.getReviewerId());

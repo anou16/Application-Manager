@@ -599,7 +599,7 @@ public class Application {
 				break;
 			case STANDBY:
 				if (command.getReviewerId() == null && command.getReviewerId().isEmpty()) {
-					throw new IllegalArgumentException("Invalid information.");
+					throw new UnsupportedOperationException("Invalid information.");
 				}
 				setReviewer(command.getReviewerId());
 				setResolution(Command.R_INTCOMPLETED);

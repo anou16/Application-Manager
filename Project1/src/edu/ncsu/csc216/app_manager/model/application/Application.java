@@ -426,8 +426,19 @@ public class Application {
 	 */
 	public String toString() {
 		String s = "";
-		s += getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + "," + getReviewer()
-				+ isProcessed() + "," + getResolution() + "\n";
+		s += getAppId() + "," + getState() + "," + getAppType() + "," + getSummary();
+
+		if (getReviewer() == null) {
+			s += "null," + isProcessed() + ",";
+		} else {
+			s += getReviewer() + isProcessed() + ",";
+		}
+
+		if (getResolution() == null) {
+			s += "null" + "\n";
+		} else {
+			s += getResolution() + "\n";
+		}
 		return s;
 	}
 

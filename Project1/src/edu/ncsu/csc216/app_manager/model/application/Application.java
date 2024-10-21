@@ -130,7 +130,7 @@ public class Application {
 		setAppType(getAppType());
 		setSummary(summary);
 
-		setReviewer(reviewer);
+		this.reviewer = null;
 		this.processPaperwork = false;
 		this.resolution = null;
 
@@ -751,7 +751,7 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				if (reviewer == null || !isProcessed()) {
+				if (reviewer == null || reviewer.isEmpty() || !isProcessed()) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
 				setResolution(Command.R_OFFERCOMPLETED);

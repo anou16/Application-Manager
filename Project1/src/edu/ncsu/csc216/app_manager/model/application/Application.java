@@ -593,14 +593,9 @@ public class Application {
 			// }
 			switch (command.getCommand()) {
 			case ACCEPT:
-				if (getState().equals(INTERVIEW_NAME)) {
-					setState(REFCHK_NAME);
-					addNote(command.getNote());
-				} else {
-					setReviewer(command.getReviewerId());
-					setState(INTERVIEW_NAME);
-					addNote(command.getNote());
-				}
+				setReviewer(command.getReviewerId());
+				setState(REFCHK_NAME);
+				addNote(command.getNote());
 				break;
 			case STANDBY:
 				setReviewer(command.getReviewerId());

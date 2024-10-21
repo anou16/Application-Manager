@@ -549,6 +549,7 @@ public class Application {
 			case REJECT:
 				setResolution(Command.R_REVCOMPLETED);
 				setState(CLOSED_NAME);
+				setReviewer(command.getReviewerId());
 				addNote(command.getNote());
 				break;
 			default:

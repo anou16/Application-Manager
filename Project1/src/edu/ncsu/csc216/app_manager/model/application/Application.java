@@ -428,13 +428,13 @@ public class Application {
 		String s = "";
 		s += "*" + getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + ",";
 
-		if (getReviewer() == null) {
+		if (getReviewer() == null || getReviewer().isEmpty()) {
 			s += "null," + isProcessed() + ",";
 		} else {
 			s += getReviewer() + "," + isProcessed() + ",";
 		}
 
-		if (getResolution() == null) {
+		if (getResolution() == null || getResolution().isEmpty()) {
 			s += "\n";
 		} else {
 			s += getResolution() + "\n";

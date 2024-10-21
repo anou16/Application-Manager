@@ -104,7 +104,7 @@ public class AppList {
 			throw new IllegalArgumentException("Invalid type.");
 		}
 
-		for (int i = 0; i < applications.size(); i++) {
+		for (int i = 0; i < applications.size() + 1; i++) {
 			Application application = applications.get(i);
 			if (application.getAppType().equals(type)) {
 				appByType.add(application);

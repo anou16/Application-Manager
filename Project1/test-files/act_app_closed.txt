@@ -1,1 +1,7 @@
-1,Closed,Old,Summary,nulltrue,OfferCompleted
+*1,Closed,Old,Summary,null,true,OfferCompleted
+-[Review] Note 1
+-[Interview] Note 2
+-[Watlist] Note 3
+-[RefCheck] Note 4
+-[Offer] Note 5
+-[Closed] Note 6

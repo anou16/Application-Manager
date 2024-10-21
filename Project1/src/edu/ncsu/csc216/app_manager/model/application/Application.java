@@ -426,7 +426,7 @@ public class Application {
 	 */
 	public String toString() {
 		String s = "";
-		s += getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + ",";
+		s += "*" + getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + ",";
 
 		if (getReviewer() == null) {
 			s += "null" + "," + isProcessed() + ",";
@@ -443,7 +443,7 @@ public class Application {
 		s += " -";
 		for (int i = 0; i < notes.size(); i++) {
 			String note = notes.get(i);
-			s += note + " ";
+			s += note;
 		}
 
 		s += "\n";

@@ -413,7 +413,7 @@ public class Application {
 	public String getNotesString() {
 		String s = "";
 		for (int i = 0; i < notes.size(); i++) {
-			s += "-" + notes.get(i) + "\n";
+			s += " -" + notes.get(i) + "\n";
 		}
 		return s;
 	}

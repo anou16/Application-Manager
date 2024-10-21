@@ -130,7 +130,7 @@ public class Application {
 		setAppType(getAppType());
 		setSummary(summary);
 
-		this.reviewer = null;
+		setReviewer(reviewer);
 		this.processPaperwork = false;
 		this.resolution = null;
 
@@ -352,6 +352,9 @@ public class Application {
 	 * @param reviewer the reviewer to set.
 	 */
 	private void setReviewer(String reviewer) {
+		if (reviewer == null || reviewer.isEmpty()) {
+			this.reviewer = "null";
+		}
 		this.reviewer = reviewer;
 	}
 

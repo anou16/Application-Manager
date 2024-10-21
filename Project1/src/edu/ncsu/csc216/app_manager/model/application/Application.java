@@ -461,7 +461,7 @@ public class Application {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 
-		String formatNote = "[" + state.getStateName() + "] " + note;
+		String formatNote = "-[" + state.getStateName() + "] " + note;
 		notes.add(formatNote);
 	}
 

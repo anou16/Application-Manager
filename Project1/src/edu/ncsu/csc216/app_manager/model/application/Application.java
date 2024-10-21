@@ -352,7 +352,11 @@ public class Application {
 	 * @param reviewer the reviewer to set.
 	 */
 	private void setReviewer(String reviewer) {
-		this.reviewer = reviewer;
+		if (reviewer != null && !reviewer.isEmpty()) {
+			this.reviewer = reviewer;
+		} else {
+			this.reviewer = "null";
+		}
 	}
 
 	/**

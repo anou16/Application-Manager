@@ -443,7 +443,7 @@ public class Application {
 		s += " -";
 		for (int i = 0; i < notes.size(); i++) {
 			String note = notes.get(i);
-			s += note;
+			s += note + " ";
 		}
 
 		s += "\n";

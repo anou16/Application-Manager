@@ -415,7 +415,7 @@ public class Application {
 		for (int i = 0; i < notes.size(); i++) {
 			s += "-" + notes.get(i) + "\n";
 		}
-		return s;
+		return s.trim();
 	}
 
 	/**

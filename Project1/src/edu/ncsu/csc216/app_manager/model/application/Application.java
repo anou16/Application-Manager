@@ -591,13 +591,9 @@ public class Application {
 			// }
 			switch (command.getCommand()) {
 			case ACCEPT:
-				if (getState().equals(INTERVIEW_NAME)) {
-					setReviewer(command.getReviewerId());
-					setState(REFCHK_NAME);
-					addNote(command.getNote());
-				} else {
-					throw new UnsupportedOperationException("Invalid information.");
-				}
+				setReviewer(command.getReviewerId());
+				setState(REFCHK_NAME);
+				addNote(command.getNote());
 				break;
 			case STANDBY:
 				setReviewer(command.getReviewerId());

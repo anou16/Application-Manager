@@ -441,7 +441,7 @@ public class Application {
 		}
 
 		s += "-" + notes.get(0);
-		for (int i = 0; i < notes.size() - 1; i++) {
+		for (int i = 1; i < notes.size() - 1; i++) {
 			String note = notes.get(i);
 			s += " -" + note;
 		}

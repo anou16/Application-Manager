@@ -441,15 +441,9 @@ public class Application {
 		}
 
 		s += "-";
-		if (notes.isEmpty()) {
-			s += "[]";
-		} else if (notes == null) {
-			s += "[null]";
-		} else {
-			for (int i = 0; i < notes.size(); i++) {
-				String note = notes.get(i);
-				s += note;
-			}
+		for (int i = 0; i < notes.size(); i++) {
+			String note = notes.get(i);
+			s += note;
 		}
 
 		s += "\n";

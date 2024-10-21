@@ -539,6 +539,9 @@ public class Application {
 				addNote(command.getNote());
 				break;
 			case STANDBY:
+				if (getAppType() == A_OLD) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
 				setResolution(Command.R_REVCOMPLETED);
 				setState(WAITLIST_NAME);
 				addNote(command.getNote());

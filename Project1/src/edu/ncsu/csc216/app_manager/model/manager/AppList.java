@@ -98,6 +98,7 @@ public class AppList {
 	 * @throws IllegalArgumentException if the type is invalid.
 	 */
 	public List<Application> getAppsByType(String type) {
+		applications.clear();
 		List<Application> appByType = new ArrayList<>();
 
 		if (type == null) {

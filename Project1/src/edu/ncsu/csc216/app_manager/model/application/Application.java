@@ -7,7 +7,7 @@ import edu.ncsu.csc216.app_manager.model.command.Command.Resolution;
 
 /**
  * The Application class handles the Application object and holds Application
- * (context), AppState (interface) and the 6 concrete state classes.
+ * (context), AppState (interface) and 6 concrete state classes.
  * 
  * @author Anoushka Piduru
  */
@@ -429,7 +429,7 @@ public class Application {
 		s += "*" + getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + ",";
 
 		if (getReviewer() == null) {
-			s += "[null]" + "," + isProcessed() + ",";
+			s += "null" + "," + isProcessed() + ",";
 		} else {
 			s += getReviewer() + "," + isProcessed() + ",";
 		}

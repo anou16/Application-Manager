@@ -429,10 +429,12 @@ public class Application {
 		s += "*" + getAppId() + "," + getState() + "," + getAppType() + "," + getSummary() + ",";
 
 		if (getReviewer() == null) {
-			s += "null" + "," + isProcessed() + ",";
+			s += "null,";
 		} else {
-			s += getReviewer() + "," + isProcessed() + ",";
+			s += getReviewer() + ",";
 		}
+
+		s += isProcessed();
 
 		if (getResolution() == null) {
 			s += "\n";

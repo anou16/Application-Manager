@@ -413,7 +413,7 @@ public class Application {
 	public String getNotesString() {
 		String s = "";
 		for (int i = 0; i < notes.size(); i++) {
-			s += " -" + notes.get(i) + "\n";
+			s += "-" + notes.get(i) + "\n";
 		}
 		return s;
 	}
@@ -440,7 +440,7 @@ public class Application {
 			s += getResolution() + "\n";
 		}
 
-		s += "-";
+		s += " -";
 		for (int i = 0; i < notes.size(); i++) {
 			String note = notes.get(i);
 			s += note;
@@ -461,7 +461,7 @@ public class Application {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 
-		String formatNote = " -[" + state.getStateName() + "] " + note;
+		String formatNote = "[" + state.getStateName() + "] " + note;
 		notes.add(formatNote);
 	}
 

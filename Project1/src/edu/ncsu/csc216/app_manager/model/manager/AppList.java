@@ -50,6 +50,7 @@ public class AppList {
 	 * @param appList the list of applications being added to.
 	 */
 	public void addApps(List<Application> appList) {
+		applications.clear();
 		for (int i = 0; i < appList.size(); i++) {
 			Application application = appList.get(i);
 			addApp(application);
@@ -98,7 +99,6 @@ public class AppList {
 	 * @throws IllegalArgumentException if the type is invalid.
 	 */
 	public List<Application> getAppsByType(String type) {
-		applications.clear();
 		List<Application> appByType = new ArrayList<>();
 
 		if (type == null) {

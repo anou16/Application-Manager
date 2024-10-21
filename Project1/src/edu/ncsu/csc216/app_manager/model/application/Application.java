@@ -158,7 +158,7 @@ public class Application {
 		setAppType(appType);
 		setSummary(summary);
 
-		if (reviewer == null || reviewer.isEmpty()) {
+		if (reviewer.isEmpty()) {
 			setReviewer("null");
 		} else {
 			setReviewer(reviewer);

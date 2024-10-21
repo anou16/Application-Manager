@@ -544,6 +544,7 @@ public class Application {
 				}
 				setResolution(Command.R_REVCOMPLETED);
 				setState(WAITLIST_NAME);
+				setReviewer(command.getReviewerId());
 				addNote(command.getNote());
 				break;
 			case REJECT:

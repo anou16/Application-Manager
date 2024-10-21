@@ -591,6 +591,9 @@ public class Application {
 			// if (command == null || !isProcessed() || command.getNote().isEmpty()) {
 			// throw new UnsupportedOperationException("Invalid information.");
 			// }
+			if (getAppType() != A_NEW && getAppType() != A_OLD) {
+				throw new UnsupportedOperationException("Invalid information.");
+			}
 			switch (command.getCommand()) {
 			case ACCEPT:
 				setReviewer(command.getReviewerId());

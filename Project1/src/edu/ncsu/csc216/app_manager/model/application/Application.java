@@ -598,7 +598,7 @@ public class Application {
 				addNote(command.getNote());
 				break;
 			case STANDBY:
-				if (command.getReviewerId() == null && command.getReviewerId().isEmpty()) {
+				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
 				setReviewer(command.getReviewerId());

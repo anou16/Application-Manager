@@ -591,16 +591,11 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				if (command.getReviewerId() != null && !command.getReviewerId().isEmpty()) {
-					setReviewer(command.getReviewerId());
-				}
+				setReviewer(command.getReviewerId());
 				setState(REFCHK_NAME);
 				addNote(command.getNote());
 				break;
 			case STANDBY:
-				if (command.getReviewerId() == null || command.getReviewerId().isEmpty()) {
-					throw new UnsupportedOperationException("Invalid information.");
-				}
 				setReviewer(command.getReviewerId());
 				setResolution(Command.R_INTCOMPLETED);
 				setState(WAITLIST_NAME);

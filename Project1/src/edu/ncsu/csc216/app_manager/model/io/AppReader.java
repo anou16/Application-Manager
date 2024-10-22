@@ -2,6 +2,7 @@ package edu.ncsu.csc216.app_manager.model.io;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 

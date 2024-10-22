@@ -166,7 +166,7 @@ public class Application {
 		if (state == REVIEW_NAME && resolution == Command.R_REVCOMPLETED && appType == A_OLD) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		if ((state == INTERVIEW_NAME && resolution == Command.R_INTCOMPLETED)
+		if ((state == INTERVIEW_NAME && resolution != null)
 				|| (state == REFCHK_NAME && resolution == Command.R_REFCHKCOMPLETED)
 				|| (state == OFFER_NAME && resolution == Command.R_OFFERCOMPLETED)) {
 			throw new IllegalArgumentException("Application cannot be created.");

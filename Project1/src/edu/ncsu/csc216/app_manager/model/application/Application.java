@@ -707,11 +707,7 @@ public class Application {
 				break;
 			case REJECT:
 				setResolution(Command.R_REFCHKCOMPLETED);
-				if (command.getReviewerId() != null) {
-					setReviewer(command.getReviewerId());
-				} else {
-					setReviewer(null);
-				}
+				setReviewer(command.getReviewerId());
 				setState(CLOSED_NAME);
 				addNote(command.getNote());
 				break;

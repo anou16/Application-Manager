@@ -608,7 +608,6 @@ public class Application {
 				setResolution(Command.R_INTCOMPLETED);
 				setState(CLOSED_NAME);
 				addNote(command.getNote());
-				setReviewer(command.getReviewerId());
 				break;
 			default:
 				throw new UnsupportedOperationException("Invalid information.");

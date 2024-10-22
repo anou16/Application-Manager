@@ -157,9 +157,6 @@ public class Application {
 				&& (reviewer == null || reviewer.isEmpty())) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		if ((state == REVIEW_NAME) && (resolution != null)) {
-			throw new IllegalArgumentException("Application cannot be created.");
-		}
 		if ((state == WAITLIST_NAME || state == CLOSED_NAME) && (resolution == null || resolution.isEmpty())) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}

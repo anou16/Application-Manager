@@ -589,9 +589,9 @@ public class Application {
 		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			// if (command == null || !isProcessed() || command.getNote().isEmpty()) {
-			// throw new UnsupportedOperationException("Invalid information.");
-			// }
+			if (command.getNote().isEmpty() || command.getReviewerId().isEmpty() || !isProcessed()) {
+				throw new UnsupportedOperationException("Invalid information.");
+			}
 			switch (command.getCommand()) {
 			case ACCEPT:
 				setReviewer(command.getReviewerId());

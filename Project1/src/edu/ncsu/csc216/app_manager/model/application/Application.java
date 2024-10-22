@@ -697,23 +697,16 @@ public class Application {
 		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			if (command.getNote().isEmpty() || isProcessed()) {
-				throw new UnsupportedOperationException("Invalid information.");
-			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				if (command.getReviewerId() != null) {
-					setReviewer(command.getReviewerId());
-				}
+				setReviewer(command.getReviewerId());
 				setProcessPaperwork(true);
 				setState(OFFER_NAME);
 				addNote(command.getNote());
 				break;
 			case REJECT:
 				setResolution(Command.R_REFCHKCOMPLETED);
-				if (command.getReviewerId() != null) {
-					setReviewer(command.getReviewerId());
-				}
+				setReviewer(command.getReviewerId());
 				setState(CLOSED_NAME);
 				addNote(command.getNote());
 				break;

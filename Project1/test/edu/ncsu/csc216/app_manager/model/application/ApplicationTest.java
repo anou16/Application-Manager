@@ -284,7 +284,7 @@ class ApplicationTest {
 
 		application.update(acceptCommand);
 		assertEquals("OfferCompleted", application.getResolution());
-		assertEquals("New", application.getAppType());
+		assertEquals("Hired", application.getAppType());
 		assertEquals("Closed", application.getState());
 		assertEquals("-Note 1\n-[Closed] note\n", application.getNotesString());
 	}

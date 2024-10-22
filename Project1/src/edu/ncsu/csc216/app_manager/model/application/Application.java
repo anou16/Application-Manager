@@ -650,9 +650,7 @@ public class Application {
 			switch (command.getCommand()) {
 			case REOPEN:
 				if (getResolution() == Command.R_INTCOMPLETED) {
-					// if (reviewer == null || reviewer.isEmpty()) {
-					// throw new UnsupportedOperationException("Invalid information.");
-					// }
+					setReviewer(command.getReviewerId());
 					setState(REFCHK_NAME);
 					addNote(command.getNote());
 					break;

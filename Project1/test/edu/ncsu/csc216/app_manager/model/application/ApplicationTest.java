@@ -247,6 +247,28 @@ class ApplicationTest {
 	}
 
 	/**
+	 * Tests the update state method with the reject command for reference check
+	 * state.
+	 */
+	@Test
+	void testRefChkRejectUpdate() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
+		application = new Application(1, Application.REFCHK_NAME, Application.A_NEW, "Summary", "Reviewer", false,
+				Command.R_REVCOMPLETED, notes);
+
+		assertEquals("RefCheck", application.getStateName());
+
+		Command acceptCommand = new Command(Command.CommandValue.REJECT, "Reviewer", Resolution.REVCOMPLETED, "note");
+
+		application.update(acceptCommand);
+		assertEquals("ReferenceCheckCompleted", application.getResolution());
+		assertEquals("New", application.getAppType());
+		assertEquals("Closed", application.getState());
+		assertEquals("-Note 1\n-[Closed] note\n", application.getNotesString());
+	}
+
+	/**
 	 * Tests the update state method with the accept command for offer state.
 	 */
 	@Test

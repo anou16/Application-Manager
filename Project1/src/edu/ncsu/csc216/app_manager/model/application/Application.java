@@ -702,6 +702,8 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
+				setReviewer(command.getReviewerId());
+				setProcessPaperwork(true);
 				setState(OFFER_NAME);
 				addNote(command.getNote());
 				break;

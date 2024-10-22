@@ -589,32 +589,34 @@ public class Application {
 		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			switch (command.getCommand()) {
-			case ACCEPT:
-				setReviewer(command.getReviewerId());
-				setProcessPaperwork(true);
-				setState(REFCHK_NAME);
-				addNote(command.getNote());
-				break;
-			case STANDBY:
-				setReviewer(command.getReviewerId());
-				setResolution(Command.R_INTCOMPLETED);
-				setState(WAITLIST_NAME);
-				addNote(command.getNote());
-				break;
-			case REJECT:
-				setResolution(Command.R_INTCOMPLETED);
-				setState(CLOSED_NAME);
-				addNote(command.getNote());
-				if (command.getReviewerId() != null) {
+			if (command.getNote().isEmpty() || command.getNote() == null || command.getReviewerId().isEmpty()
+					|| command.getReviewerId() == null || !isProcessed())
+				switch (command.getCommand()) {
+				case ACCEPT:
 					setReviewer(command.getReviewerId());
-				} else {
-					setReviewer(null);
+					setProcessPaperwork(true);
+					setState(REFCHK_NAME);
+					addNote(command.getNote());
+					break;
+				case STANDBY:
+					setReviewer(command.getReviewerId());
+					setResolution(Command.R_INTCOMPLETED);
+					setState(WAITLIST_NAME);
+					addNote(command.getNote());
+					break;
+				case REJECT:
+					setResolution(Command.R_INTCOMPLETED);
+					setState(CLOSED_NAME);
+					addNote(command.getNote());
+					if (command.getReviewerId() != null) {
+						setReviewer(command.getReviewerId());
+					} else {
+						setReviewer(null);
+					}
+					break;
+				default:
+					throw new UnsupportedOperationException("Invalid information.");
 				}
-				break;
-			default:
-				throw new UnsupportedOperationException("Invalid information.");
-			}
 		}
 
 		/**

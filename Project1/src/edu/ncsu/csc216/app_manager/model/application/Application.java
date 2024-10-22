@@ -153,6 +153,9 @@ public class Application {
 	 */
 	public Application(int id, String state, String appType, String summary, String reviewer, boolean confirmed,
 			String resolution, ArrayList<String> notes) {
+		if (state == INTERVIEW_NAME && (reviewer == null || reviewer.isEmpty())) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 		setAppId(id);
 		setState(state);
 		setAppType(appType);

@@ -75,8 +75,8 @@ class ApplicationTest {
 	void testReviewAcceptUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false,
-				Command.R_REVCOMPLETED, notes);
+		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false, null,
+				notes);
 
 		assertEquals("Review", application.getStateName());
 
@@ -93,8 +93,8 @@ class ApplicationTest {
 	void testReviewStandbyUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false,
-				Command.R_REVCOMPLETED, notes);
+		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false, null,
+				notes);
 
 		assertEquals("Review", application.getStateName());
 
@@ -112,8 +112,8 @@ class ApplicationTest {
 	void testReviewRejectUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false,
-				Command.R_REVCOMPLETED, notes);
+		application = new Application(1, Application.REVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", false, null,
+				notes);
 
 		assertEquals("Review", application.getStateName());
 
@@ -131,7 +131,7 @@ class ApplicationTest {
 	void testInterviewAcceptUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.INTERVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
+		application = new Application(1, Application.INTERVIEW_NAME, Application.A_OLD, "Summary", "Reviewer", true,
 				Command.R_REVCOMPLETED, notes);
 
 		assertEquals("Interview", application.getStateName());
@@ -150,7 +150,7 @@ class ApplicationTest {
 	void testInterviewStandbyUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.INTERVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
+		application = new Application(1, Application.INTERVIEW_NAME, Application.A_OLD, "Summary", "Reviewer", true,
 				Command.R_REVCOMPLETED, notes);
 
 		assertEquals("Interview", application.getStateName());
@@ -170,7 +170,7 @@ class ApplicationTest {
 	void testInterviewRejectUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.INTERVIEW_NAME, Application.A_NEW, "Summary", "Reviewer", true,
+		application = new Application(1, Application.INTERVIEW_NAME, Application.A_OLD, "Summary", "Reviewer", true,
 				Command.R_REVCOMPLETED, notes);
 
 		assertEquals("Interview", application.getStateName());
@@ -232,7 +232,7 @@ class ApplicationTest {
 	void testRefChkAcceptUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.REFCHK_NAME, Application.A_NEW, "Summary", "Reviewer", false,
+		application = new Application(1, Application.REFCHK_NAME, Application.A_OLD, "Summary", "Reviewer", false,
 				Command.R_REVCOMPLETED, notes);
 
 		assertEquals("RefCheck", application.getStateName());
@@ -241,7 +241,7 @@ class ApplicationTest {
 
 		application.update(acceptCommand);
 		assertEquals("ReviewCompleted", application.getResolution());
-		assertEquals("New", application.getAppType());
+		assertEquals("Old", application.getAppType());
 		assertEquals("Offer", application.getState());
 		assertEquals("-Note 1\n-[Offer] note\n", application.getNotesString());
 	}
@@ -254,7 +254,7 @@ class ApplicationTest {
 	void testRefChkRejectUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.REFCHK_NAME, Application.A_NEW, "Summary", "Reviewer", false,
+		application = new Application(1, Application.REFCHK_NAME, Application.A_OLD, "Summary", "Reviewer", false,
 				Command.R_REVCOMPLETED, notes);
 
 		assertEquals("RefCheck", application.getStateName());
@@ -263,7 +263,7 @@ class ApplicationTest {
 
 		application.update(acceptCommand);
 		assertEquals("ReferenceCheckCompleted", application.getResolution());
-		assertEquals("New", application.getAppType());
+		assertEquals("Old", application.getAppType());
 		assertEquals("Closed", application.getState());
 		assertEquals("-Note 1\n-[Closed] note\n", application.getNotesString());
 	}
@@ -275,7 +275,7 @@ class ApplicationTest {
 	void testOfferAcceptUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.OFFER_NAME, Application.A_NEW, "Summary", "Reviewer", true,
+		application = new Application(1, Application.OFFER_NAME, Application.A_OLD, "Summary", "Reviewer", true,
 				Command.R_REVCOMPLETED, notes);
 
 		assertEquals("Offer", application.getStateName());

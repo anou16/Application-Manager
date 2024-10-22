@@ -597,7 +597,6 @@ public class Application {
 				setReviewer(command.getReviewerId());
 				setState(REFCHK_NAME);
 				addNote(command.getNote());
-				setAppType(A_OLD);
 				break;
 			case STANDBY:
 				setReviewer(command.getReviewerId());

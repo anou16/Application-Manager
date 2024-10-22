@@ -650,6 +650,7 @@ public class Application {
 			case REOPEN:
 				if (getResolution() == Command.R_INTCOMPLETED) {
 					setReviewer(command.getReviewerId());
+					setProcessPaperwork(true);
 					setState(REFCHK_NAME);
 					addNote(command.getNote());
 					break;
@@ -657,7 +658,7 @@ public class Application {
 				if (getResolution() == Command.R_REVCOMPLETED && getAppType() == A_NEW) {
 					setAppType(A_OLD);
 					setState(REVIEW_NAME);
-					setResolution(null);
+					// setResolution(null);
 					addNote(command.getNote());
 					break;
 				}
@@ -750,9 +751,9 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				// if (reviewer == null || reviewer.isEmpty() || !isProcessed()) {
-				// throw new UnsupportedOperationException("Invalid information.");
-				// }
+				if (reviewer == null || reviewer.isEmpty() || !isProcessed()) {
+					throw new UnsupportedOperationException("Invalid information.");
+				}
 				setResolution(Command.R_OFFERCOMPLETED);
 				setState(CLOSED_NAME);
 				addNote(command.getNote());

@@ -170,7 +170,7 @@ public class Application {
 				|| (state == OFFER_NAME && resolution == Command.R_OFFERCOMPLETED)) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		if (state == INTERVIEW_NAME && resolution != null && (!resolution.isBlank() || resolution.isEmpty())) {
+		if (state == INTERVIEW_NAME && resolution != null && (!resolution.isBlank() || !resolution.isEmpty())) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 		if ((state == INTERVIEW_NAME || state == REVIEW_NAME) && confirmed) {

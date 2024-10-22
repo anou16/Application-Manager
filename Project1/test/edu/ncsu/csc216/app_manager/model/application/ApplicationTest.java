@@ -131,7 +131,7 @@ class ApplicationTest {
 	void testInterviewAcceptUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.INTERVIEW_NAME, Application.A_OLD, "Summary", "Reviewer", true,
+		application = new Application(1, Application.INTERVIEW_NAME, Application.A_OLD, "Summary", "Reviewer", false,
 				Command.R_REVCOMPLETED, notes);
 
 		assertEquals("Interview", application.getStateName());
@@ -150,7 +150,7 @@ class ApplicationTest {
 	void testInterviewStandbyUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.INTERVIEW_NAME, Application.A_OLD, "Summary", "Reviewer", true,
+		application = new Application(1, Application.INTERVIEW_NAME, Application.A_OLD, "Summary", "Reviewer", false,
 				Command.R_REVCOMPLETED, notes);
 
 		assertEquals("Interview", application.getStateName());
@@ -170,7 +170,7 @@ class ApplicationTest {
 	void testInterviewRejectUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.INTERVIEW_NAME, Application.A_OLD, "Summary", "Reviewer", true,
+		application = new Application(1, Application.INTERVIEW_NAME, Application.A_OLD, "Summary", "Reviewer", false,
 				Command.R_REVCOMPLETED, notes);
 
 		assertEquals("Interview", application.getStateName());

@@ -702,9 +702,9 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				if (reviewer == null || reviewer.isEmpty() || isProcessed()) {
-					throw new UnsupportedOperationException("Invalid information.");
-				}
+				// if (reviewer == null || reviewer.isEmpty() || isProcessed()) {
+				// throw new UnsupportedOperationException("Invalid information.");
+				// }
 				setState(OFFER_NAME);
 				addNote(command.getNote());
 				break;

@@ -702,14 +702,18 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				setReviewer(command.getReviewerId());
+				if (command.getReviewerId() != null) {
+					setReviewer(command.getReviewerId());
+				}
 				setProcessPaperwork(true);
 				setState(OFFER_NAME);
 				addNote(command.getNote());
 				break;
 			case REJECT:
 				setResolution(Command.R_REFCHKCOMPLETED);
-				setReviewer(command.getReviewerId());
+				if (command.getReviewerId() != null) {
+					setReviewer(command.getReviewerId());
+				}
 				setState(CLOSED_NAME);
 				addNote(command.getNote());
 				break;

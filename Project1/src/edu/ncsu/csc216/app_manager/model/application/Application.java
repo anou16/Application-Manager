@@ -652,6 +652,7 @@ public class Application {
 					setReviewer(command.getReviewerId());
 					setProcessPaperwork(true);
 					setState(REFCHK_NAME);
+					setResolution(null);
 					addNote(command.getNote());
 					break;
 				}

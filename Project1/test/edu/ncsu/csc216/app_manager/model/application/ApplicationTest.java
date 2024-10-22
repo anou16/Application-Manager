@@ -276,7 +276,7 @@ class ApplicationTest {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
 		application = new Application(1, Application.OFFER_NAME, Application.A_OLD, "Summary", "Reviewer", true,
-				Command.R_REVCOMPLETED, notes);
+				Command.R_INTCOMPLETED, notes);
 
 		assertEquals("Offer", application.getStateName());
 

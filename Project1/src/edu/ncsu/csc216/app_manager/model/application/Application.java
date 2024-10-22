@@ -174,6 +174,9 @@ public class Application {
 		if ((state == INTERVIEW_NAME || state == REVIEW_NAME) && confirmed) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
+		if (resolution == Command.R_REVCOMPLETED && confirmed) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 		setAppId(id);
 		setState(state);
 		setAppType(appType);

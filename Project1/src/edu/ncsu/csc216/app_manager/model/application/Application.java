@@ -702,9 +702,6 @@ public class Application {
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:
-				// if (reviewer == null || reviewer.isEmpty() || isProcessed()) {
-				// throw new UnsupportedOperationException("Invalid information.");
-				// }
 				setState(OFFER_NAME);
 				addNote(command.getNote());
 				break;
@@ -712,6 +709,8 @@ public class Application {
 				setResolution(Command.R_REFCHKCOMPLETED);
 				if (command.getReviewerId() != null) {
 					setReviewer(command.getReviewerId());
+				} else {
+					setReviewer(null);
 				}
 				setState(CLOSED_NAME);
 				addNote(command.getNote());

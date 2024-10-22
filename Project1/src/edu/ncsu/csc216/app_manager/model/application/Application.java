@@ -757,7 +757,7 @@ public class Application {
 					throw new UnsupportedOperationException("Invalid information.");
 				}
 				setResolution(Command.R_OFFERCOMPLETED);
-				setState(REFCHK_NAME);
+				setState(CLOSED_NAME);
 				addNote(command.getNote());
 				break;
 			case REJECT:

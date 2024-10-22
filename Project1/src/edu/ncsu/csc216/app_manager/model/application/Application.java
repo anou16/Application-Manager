@@ -712,8 +712,6 @@ public class Application {
 				setResolution(Command.R_REFCHKCOMPLETED);
 				if (command.getReviewerId() != null) {
 					setReviewer(command.getReviewerId());
-				} else {
-					setReviewer(null);
 				}
 				setState(CLOSED_NAME);
 				addNote(command.getNote());

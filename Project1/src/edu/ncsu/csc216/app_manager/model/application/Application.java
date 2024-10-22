@@ -163,7 +163,7 @@ public class Application {
 		if ((state == INTERVIEW_NAME || state == REFCHK_NAME || state == OFFER_NAME) && (appType == A_NEW)) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		if ((state == REVIEW_NAME && appType == A_OLD) && (resolution != null)) {
+		if ((state == REVIEW_NAME && appType == A_OLD && resolution != null)) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 		setAppId(id);

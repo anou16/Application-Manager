@@ -590,7 +590,7 @@ public class Application {
 		 */
 		public void updateState(Command command) {
 			if (command.getNote().isEmpty() || command.getReviewerId().isEmpty() || !isProcessed()) {
-				throw new UnsupportedOperationException("Invalid information.");
+				throw new IllegalArgumentException("Invalid information.");
 			}
 			switch (command.getCommand()) {
 			case ACCEPT:

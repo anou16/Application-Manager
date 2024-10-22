@@ -754,11 +754,13 @@ public class Application {
 				}
 				setResolution(Command.R_OFFERCOMPLETED);
 				setState(CLOSED_NAME);
+				setAppType(A_HIRED);
 				addNote(command.getNote());
 				break;
 			case REJECT:
 				setResolution(Command.R_OFFERCOMPLETED);
 				setState(CLOSED_NAME);
+				setReviewer(null);
 				addNote(command.getNote());
 				break;
 			default:

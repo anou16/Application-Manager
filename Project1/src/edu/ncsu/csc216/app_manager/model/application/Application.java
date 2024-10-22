@@ -644,9 +644,9 @@ public class Application {
 		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			if (command.getNote().isEmpty() || isProcessed()) {
-				throw new UnsupportedOperationException("Invalid information.");
-			}
+			// if (command.getNote().isEmpty() || isProcessed()) {
+			// throw new UnsupportedOperationException("Invalid information.");
+			// }
 			switch (command.getCommand()) {
 			case REOPEN:
 				if (getResolution() == Command.R_INTCOMPLETED) {

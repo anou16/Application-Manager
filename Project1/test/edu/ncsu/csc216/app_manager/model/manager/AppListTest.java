@@ -125,7 +125,7 @@ class AppListTest {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
 
-		Application app = new Application(1, "Interview", "Old", "Summary", "Reviewer", false, "ReviewCompleted", notes);
+		Application app = new Application(1, "Interview", "Old", "Summary", "Reviewer", false, null, notes);
 		applicationList.add(app);
 
 		appList.addApps(applicationList);

@@ -589,12 +589,10 @@ public class Application {
 		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			if (command.getNote().isEmpty() || command.getReviewerId().isEmpty() || !isProcessed()) {
-				throw new IllegalArgumentException("Invalid information.");
-			}
 			switch (command.getCommand()) {
 			case ACCEPT:
 				setReviewer(command.getReviewerId());
+				setProcessPaperwork(true);
 				setState(REFCHK_NAME);
 				addNote(command.getNote());
 				break;
@@ -608,7 +606,6 @@ public class Application {
 				setResolution(Command.R_INTCOMPLETED);
 				setState(CLOSED_NAME);
 				addNote(command.getNote());
-				setReviewer(command.getReviewerId());
 				break;
 			default:
 				throw new UnsupportedOperationException("Invalid information.");

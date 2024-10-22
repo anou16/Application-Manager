@@ -644,9 +644,6 @@ public class Application {
 		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			// if (command.getNote().isEmpty() || isProcessed()) {
-			// throw new UnsupportedOperationException("Invalid information.");
-			// }
 			switch (command.getCommand()) {
 			case REOPEN:
 				if (getResolution() == Command.R_INTCOMPLETED) {
@@ -657,7 +654,7 @@ public class Application {
 				}
 				if (getResolution() == Command.R_REVCOMPLETED && getAppType() == A_NEW) {
 					setAppType(A_OLD);
-					setState(REFCHK_NAME);
+					setState(REVIEW_NAME);
 					setResolution(null);
 					addNote(command.getNote());
 					break;

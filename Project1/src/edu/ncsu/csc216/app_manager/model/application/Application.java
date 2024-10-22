@@ -171,6 +171,9 @@ public class Application {
 				|| (state == OFFER_NAME && resolution == Command.R_OFFERCOMPLETED)) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
+		if (state == INTERVIEW_NAME && confirmed) {
+			throw new IllegalArgumentException("Application cannot be created.");
+		}
 		setAppId(id);
 		setState(state);
 		setAppType(appType);
@@ -604,9 +607,6 @@ public class Application {
 		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			if (isProcessed()) {
-				throw new IllegalArgumentException("Invalid information.");
-			}
 			switch (command.getCommand()) {
 			case ACCEPT:
 				setReviewer(command.getReviewerId());

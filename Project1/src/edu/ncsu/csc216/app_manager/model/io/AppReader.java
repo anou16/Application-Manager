@@ -27,15 +27,17 @@ public class AppReader {
 		try {
 			Scanner scnr = new Scanner(new FileInputStream(filename));
 			while (scnr.hasNextLine()) {
-				s += scnr.nextLine() + "\n";
+				s += scnr.nextLine();
+				s += "\n";
 			}
 			scnr.close();
 
 			String[] appStrings = s.toString().split("\\r?\\n?[*]");
 
 			for (int i = 0; i < appStrings.length; i++) {
-				if (!appStrings[i].isEmpty()) {
-					application.add(processApp(appStrings[i]));
+				String string = appStrings[i];
+				if (!string.isEmpty()) {
+					application.add(processApp(string));
 				}
 			}
 			return application;
@@ -70,9 +72,6 @@ public class AppReader {
 
 		if (appParams.length == 7) {
 			resolution = appParams[6].trim();
-			if (resolution.isBlank()) {
-				resolution = null;
-			}
 		}
 		ArrayList<String> notes = new ArrayList<>();
 

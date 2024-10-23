@@ -70,5 +70,9 @@ class AppReaderTest {
 	void testReadAppsFromInvalidFile8() {
 		assertThrows(IllegalArgumentException.class,
 				() -> AppReader.readAppsFromFile("test-files/app8.txt"));
+		assertThrows(IllegalArgumentException.class,
+				() -> AppReader.readAppsFromFile("test-files/app10.txt"));
+		assertThrows(IllegalArgumentException.class,
+				() -> AppReader.readAppsFromFile("test-files/app12.txt"));
 	}
 }

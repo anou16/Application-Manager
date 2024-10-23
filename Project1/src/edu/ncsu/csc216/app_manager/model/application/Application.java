@@ -133,7 +133,6 @@ public class Application {
 		this.reviewer = null;
 		this.processPaperwork = false;
 		this.resolution = null;
-
 		this.notes = new ArrayList<String>();
 		addNote(note);
 	}

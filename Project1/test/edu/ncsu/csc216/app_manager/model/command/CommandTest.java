@@ -5,7 +5,7 @@ package edu.ncsu.csc216.app_manager.model.command;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
 

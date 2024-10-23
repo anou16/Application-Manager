@@ -47,13 +47,13 @@ public class Command {
 	/** The note added to the application. */
 	private String note;
 
-	/** "ReviewCompleted" resolution */
+	/** "ReviewCompleted" resolution string. */
 	public static final String R_REVCOMPLETED = "ReviewCompleted";
-	/** "InterviewCompleted resolution */
+	/** "InterviewCompleted" resolution string. */
 	public static final String R_INTCOMPLETED = "InterviewCompleted";
-	/** "ReferenceCheckCompleted" resolution */
+	/** "ReferenceCheckCompleted" resolution string. */
 	public static final String R_REFCHKCOMPLETED = "ReferenceCheckCompleted";
-	/** "OfferCompleted" resolution */
+	/** "OfferCompleted" resolution string. */
 	public static final String R_OFFERCOMPLETED = "OfferCompleted";
 
 	/**
@@ -94,7 +94,7 @@ public class Command {
 	/**
 	 * Getter for the command value.
 	 * 
-	 * @return the commandValue
+	 * @return the commandValue.
 	 */
 	public CommandValue getCommand() {
 		return commandValue;
@@ -103,7 +103,7 @@ public class Command {
 	/**
 	 * Getter for the reviewer ID.
 	 * 
-	 * @return the reviewerId
+	 * @return the reviewerId.
 	 */
 	public String getReviewerId() {
 		return reviewerId;
@@ -112,7 +112,7 @@ public class Command {
 	/**
 	 * Getter for the resolution.
 	 * 
-	 * @return the resolution
+	 * @return the resolution.
 	 */
 	public Resolution getResolution() {
 		return resolution;
@@ -121,7 +121,7 @@ public class Command {
 	/**
 	 * Getter for the note.
 	 * 
-	 * @return the note
+	 * @return the note.
 	 */
 	public String getNote() {
 		return note;

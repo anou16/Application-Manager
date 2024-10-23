@@ -51,7 +51,7 @@ class AppWriterTest {
 	}
 
 	/**
-	 * Tests construction of AppWriter
+	 * Tests construction of AppWriter.
 	 */
 	@Test
 	void testAppWriterConstruction() {

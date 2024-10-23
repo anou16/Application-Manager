@@ -9,6 +9,8 @@ import edu.ncsu.csc216.app_manager.model.io.AppWriter;
 /**
  * The AppManager class controls the creation and modification of applications
  * and provides information to the GUI.
+ * 
+ * @author Anoushka Piduru
  */
 public class AppManager {
 
@@ -62,7 +64,7 @@ public class AppManager {
 	}
 
 	/**
-	 * Returns a 2D array representation of the application list.
+	 * Creates a 2D array representation of the application list.
 	 * 
 	 * @return a 2D array representation of the application list.
 	 */
@@ -82,7 +84,7 @@ public class AppManager {
 	}
 
 	/**
-	 * Returns a list of applications categorized by specific application type as a
+	 * Creates a list of applications categorized by specific application type as a
 	 * 2D array.
 	 * 
 	 * @param type the application type.

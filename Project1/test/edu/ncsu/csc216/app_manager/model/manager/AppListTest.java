@@ -49,7 +49,7 @@ class AppListTest {
 	}
 
 	/**
-	 * Tests the get application by type method.
+	 * Tests getAppsByType.
 	 */
 	@Test
 	void testGetAppsByType() {
@@ -69,7 +69,7 @@ class AppListTest {
 	}
 
 	/**
-	 * Tests the get application by id method.
+	 * Tests getAppsById.
 	 */
 	@Test
 	void testGetAppsById() {
@@ -93,7 +93,7 @@ class AppListTest {
 	}
 
 	/**
-	 * Tests the delete application by id method.
+	 * Tests deleteAppById.
 	 */
 	@Test
 	void testDeleteAppById() {
@@ -116,7 +116,7 @@ class AppListTest {
 	}
 
 	/**
-	 * Tests the execute command method.
+	 * Tests executeCommand.
 	 */
 	@Test
 	void testExecuteCommand() {

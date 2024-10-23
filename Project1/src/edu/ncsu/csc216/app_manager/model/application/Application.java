@@ -41,26 +41,24 @@ public class Application {
 	/** Closed state string. */
 	public final static String CLOSED_NAME = "Closed";
 
-	/** Unique application ID of application. */
+	/** Application ID of application. */
 	private int appId;
 	/** The current state of the application of type AppState. */
 	private AppState state;
-	/** The categorized type of application, new or old. */
+	/** The categorized type of application of type AppType. */
 	private AppType appType;
 	/**
 	 * The application's summary information from when the application is created.
 	 */
 	private String summary;
-	/**
-	 * User ID of the application reviewer. Null if there is no assigned reviewer.
-	 */
+	/** User ID of the application reviewer. */
 	private String reviewer;
 	/**
 	 * Boolean value representing whether paperwork required for current stage is
 	 * processed.
 	 */
 	private boolean processPaperwork;
-	/** Resolution of the application. */
+	/** Resolution of the application of type Resolution. */
 	private Resolution resolution;
 	/** An ArrayList of all the added notes of an application. */
 	private ArrayList<String> notes;
@@ -113,11 +111,11 @@ public class Application {
 	 * The first constructor for Application taking AppType, summary, and note as
 	 * parameters.
 	 * 
-	 * @param id      the application ID
-	 * @param appType the type of application
-	 * @param summary the summary information of application
-	 * @param note    the note to be added to the application
-	 * @throws IllegalArgumentException if the Application cannot be created
+	 * @param id      the application ID.
+	 * @param appType the type of application.
+	 * @param summary the summary information of application.
+	 * @param note    the note to be added to the application.
+	 * @throws IllegalArgumentException if the Application cannot be created.
 	 */
 	public Application(int id, AppType appType, String summary, String note) {
 		if (appType == null || summary == null || summary.isEmpty() || note == null || note.isEmpty() || id < 1) {
@@ -141,14 +139,16 @@ public class Application {
 	 * The second constructor for Application taking id, state, appType, summary,
 	 * reviewer, confirmed, resolution, and notes as parameters.
 	 * 
-	 * @param id         the application id
-	 * @param state      the state of the application
-	 * @param appType    the type of application
-	 * @param summary    the summary information of the application
-	 * @param reviewer   the application reviewer
+	 * @param id         the application id.
+	 * @param state      the state of the application.
+	 * @param appType    the type of application.
+	 * @param summary    the summary information of the application.
+	 * @param reviewer   the application reviewer.
 	 * @param confirmed  whether the paperwork has been processed.
-	 * @param resolution the application resolution
-	 * @param notes      the notes to be added to the application
+	 * @param resolution the application resolution.
+	 * @param notes      the notes to be added to the application.
+	 * @throws IllegalArgumentException if there are any conflicts or issues with
+	 *                                  the parameters.
 	 */
 	public Application(int id, String state, String appType, String summary, String reviewer, boolean confirmed,
 			String resolution, ArrayList<String> notes) {
@@ -164,8 +164,8 @@ public class Application {
 				&& (reviewer == null || reviewer.isEmpty() || reviewer.isBlank() || "".equals(reviewer))) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		if (state.equals(WAITLIST_NAME) && (resolution != null && !resolution.equals(Command.R_REVCOMPLETED)
-				&& !resolution.equals(Command.R_INTCOMPLETED))) {
+		if (state.equals(WAITLIST_NAME) && resolution != null && !resolution.equals(Command.R_REVCOMPLETED)
+				&& !resolution.equals(Command.R_INTCOMPLETED)) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 		if (state.equals(WAITLIST_NAME) || state.equals(CLOSED_NAME)) {
@@ -414,7 +414,7 @@ public class Application {
 	/**
 	 * Setter for processPaperwork boolean.
 	 * 
-	 * @param processPaperwork the processPaperwork to set.
+	 * @param processPaperwork the processPaperwork value to set.
 	 */
 	private void setProcessPaperwork(boolean processPaperwork) {
 		this.processPaperwork = processPaperwork;
@@ -558,7 +558,7 @@ public class Application {
 	}
 
 	/**
-	 * Handles the review state of the application process.
+	 * Inner class to handle the review state of the application process.
 	 */
 	private class ReviewState implements AppState {
 
@@ -619,7 +619,7 @@ public class Application {
 	}
 
 	/**
-	 * Handles the interview state of the application process.
+	 * Inner class to handle the interview state of the application process.
 	 */
 	private class InterviewState implements AppState {
 
@@ -677,7 +677,7 @@ public class Application {
 	}
 
 	/**
-	 * Handles the wait list state of the application process.
+	 * Inner class to handle the wait list state of the application process.
 	 */
 	private class WaitlistState implements AppState {
 		/**
@@ -728,7 +728,7 @@ public class Application {
 	}
 
 	/**
-	 * Handles the reference check state of the application process.
+	 * Inner class to handle the reference check state of the application process.
 	 */
 	private class RefChkState implements AppState {
 		/**
@@ -775,7 +775,7 @@ public class Application {
 	}
 
 	/**
-	 * Handles the offer state of the application process.
+	 * Inner class to handle the offer state of the application process.
 	 */
 	private class OfferState implements AppState {
 		/**
@@ -828,7 +828,7 @@ public class Application {
 	}
 
 	/**
-	 * Handles the closed state of the application process.
+	 * Inner class to handle the closed state of the application process.
 	 */
 	private class ClosedState implements AppState {
 		/**

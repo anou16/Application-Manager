@@ -25,7 +25,6 @@ public class AppList {
 	public AppList() {
 		this.counter = 0;
 		this.applications = new ArrayList<Application>();
-
 	}
 
 	/**

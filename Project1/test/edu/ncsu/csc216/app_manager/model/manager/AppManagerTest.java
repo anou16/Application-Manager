@@ -4,6 +4,11 @@
 package edu.ncsu.csc216.app_manager.model.manager;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +25,10 @@ class AppManagerTest {
 
 	/** The Singleton instance of AppManager. */
 	private AppManager appManager;
+	/** A file for testing. */
+	private static final String FILE = "test-files/appFile.txt";
+	/** A file for testing. */
+	private static final String FILE_2 = "test-files/act_app_closed.txt";
 
 	/**
 	 * Tests getting the application list as an array.
@@ -30,12 +39,12 @@ class AppManagerTest {
 		appManager.createNewAppList();
 
 		appManager.addAppToList(AppType.NEW, "Summary", "Note");
-		Object[][] arr = appManager.getAppListAsArray();
+		Object[][] array = appManager.getAppListAsArray();
 
-		assertEquals(1, arr[0][0]);
-		assertEquals("Review", arr[0][1]);
-		assertEquals("New", arr[0][2]);
-		assertEquals("Summary", arr[0][3]);
+		assertEquals(1, array[0][0]);
+		assertEquals("Review", array[0][1]);
+		assertEquals("New", array[0][2]);
+		assertEquals("Summary", array[0][3]);
 	}
 
 	/**
@@ -71,6 +80,13 @@ class AppManagerTest {
 		assertEquals("Review", arr[2][1]);
 		assertEquals("Old", arr[2][2]);
 		assertEquals("Summary 5", arr[2][3]);
+
+		// Null type
+		assertThrows(IllegalArgumentException.class, () -> AppManager.getInstance().getAppListAsArrayByAppType(null));
+
+		// Invalid type
+		Object[][] array = AppManager.getInstance().getAppListAsArrayByAppType("InvalidType");
+		assertEquals(0, array.length);
 	}
 
 	/**
@@ -94,7 +110,7 @@ class AppManagerTest {
 	}
 
 	/**
-	 * Tests the execute command method.
+	 * Tests the delete application by ID method.
 	 */
 	@Test
 	void testDeleteAppById() {
@@ -108,5 +124,41 @@ class AppManagerTest {
 		assertEquals("New", appManager.getAppById(1).getAppType());
 		appManager.deleteAppById(1);
 		assertEquals(2, appManager.getAppListAsArray().length);
+	}
+
+	/**
+	 * Tests saving applications to a file.
+	 */
+	@Test
+	void testSaveAppsToFile() {
+		appManager = AppManager.getInstance();
+		appManager.createNewAppList();
+
+		appManager.addAppToList(AppType.NEW, "Summary", "Note");
+		appManager.addAppToList(AppType.NEW, "Summary", "Note");
+		appManager.addAppToList(AppType.OLD, "Summary", "Note");
+
+		appManager.saveAppsToFile(FILE);
+		File filename = new File(FILE);
+		assertTrue(filename.exists());
+
+		assertTrue(filename.length() > 0);
+	}
+
+	/**
+	 * Tests loading applications from a file.
+	 */
+	@Test
+	void testLoadAppsFromFile() {
+		appManager = AppManager.getInstance();
+		appManager.createNewAppList();
+
+		appManager.loadAppsFromFile(FILE_2);
+		assertEquals("Closed", appManager.getAppById(1).getState());
+		assertEquals("Old", appManager.getAppById(1).getAppType());
+		assertEquals("Summary", appManager.getAppById(1).getSummary());
+		assertEquals("null", appManager.getAppById(1).getReviewer());
+		assertTrue(appManager.getAppById(1).isProcessed());
+		assertEquals("OfferCompleted", appManager.getAppById(1).getResolution());
 	}
 }

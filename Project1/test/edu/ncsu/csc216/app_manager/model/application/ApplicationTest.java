@@ -32,12 +32,13 @@ class ApplicationTest {
 	 */
 	@Test
 	void testApplicationIntAppTypeStringString() {
+		// Valid application
 		application = new Application(1, AppType.NEW, "Summary", "Note 1");
 		assertEquals(1, application.getAppId());
 		assertEquals("New", application.getAppType());
 		assertEquals("Summary", application.getSummary());
 		assertEquals("[Review] Note 1", application.getNotes().get(0));
-
+		// Invalid application
 		Exception e1 = assertThrows(IllegalArgumentException.class, () -> new Application(-1, null, null, null));
 		assertEquals(e1.getMessage(), "Application cannot be created.");
 	}
@@ -69,7 +70,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the accept command for review state.
+	 * Tests updateState with the ACCEPT command for Review state.
 	 */
 	@Test
 	void testReviewAcceptUpdate() {
@@ -87,7 +88,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the standby command for review state.
+	 * Tests updateState with the STANDBY command for Review state.
 	 */
 	@Test
 	void testReviewStandbyUpdate() {
@@ -106,7 +107,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the standby command for review state.
+	 * Tests updateState with the REJECT command for Review state.
 	 */
 	@Test
 	void testReviewRejectUpdate() {
@@ -125,7 +126,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the accept command for interview state.
+	 * Tests updateState with the ACCEPT command for Interview state.
 	 */
 	@Test
 	void testInterviewAcceptUpdate() {
@@ -144,7 +145,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the standby command for interview state.
+	 * Tests updateState with the STANDBY command for Interview state.
 	 */
 	@Test
 	void testInterviewStandbyUpdate() {
@@ -164,7 +165,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the reject command for interview state.
+	 * Tests updateState with the REJECT command for Interview state.
 	 */
 	@Test
 	void testInterviewRejectUpdate() {
@@ -183,7 +184,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the reopen command for wait list state.
+	 * Tests updateState with the REOPEN command for Closed state.
 	 */
 	@Test
 	void testClosedReopenUpdate() {
@@ -204,7 +205,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the reopen command for wait list state.
+	 * Tests updateState with the REOPEN command for Wait list state.
 	 */
 	@Test
 	void testWaitlistReopenUpdate() {
@@ -225,7 +226,8 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the reopen command for wait list state.
+	 * Tests updateState in the Wait list state with the REOPEN command when
+	 * resolution is INTCOMPLETED.
 	 */
 	@Test
 	void testWaitlistReopenUpdateIntCompleted() {
@@ -246,8 +248,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the accept command for reference check
-	 * state.
+	 * Tests updateState with the ACCEPT command for Reference Check state.
 	 */
 	@Test
 	void testRefChkAcceptUpdate() {
@@ -268,8 +269,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the reject command for reference check
-	 * state.
+	 * Tests updateState with the REJECT command for Reference Check state.
 	 */
 	@Test
 	void testRefChkRejectUpdate() {
@@ -290,7 +290,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the accept command for offer state.
+	 * Tests updateState with the ACCEPT command for Offer state.
 	 */
 	@Test
 	void testOfferAcceptUpdate() {
@@ -311,7 +311,7 @@ class ApplicationTest {
 	}
 
 	/**
-	 * Tests the update state method with the reject command for offer state.
+	 * Tests updateState with the REJECT command for Offer state.
 	 */
 	@Test
 	void testOfferRejectUpdate() {

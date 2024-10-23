@@ -125,7 +125,6 @@ public class Application {
 		setAppId(id);
 		setState(REVIEW_NAME);
 		this.appType = appType;
-		setAppType(getAppType());
 		setSummary(summary);
 
 		this.reviewer = null;

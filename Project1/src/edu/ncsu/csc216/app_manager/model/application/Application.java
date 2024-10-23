@@ -168,10 +168,8 @@ public class Application {
 				&& !resolution.equals(Command.R_INTCOMPLETED)) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		if (state.equals(WAITLIST_NAME) || state.equals(CLOSED_NAME)) {
-			if (resolution == null || resolution.isEmpty()) {
-				throw new IllegalArgumentException("Application cannot be created.");
-			}
+		if ((state.equals(WAITLIST_NAME) || state.equals(CLOSED_NAME)) && (resolution == null || resolution.isEmpty())) {
+			throw new IllegalArgumentException("Application cannot be created.");
 		}
 		if ((state == INTERVIEW_NAME || state == REFCHK_NAME || state == OFFER_NAME) && (appType == A_NEW)) {
 			throw new IllegalArgumentException("Application cannot be created.");

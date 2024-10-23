@@ -290,6 +290,28 @@ class ApplicationTest {
 	}
 
 	/**
+	 * Tests the update state method with the reject command for offer state.
+	 */
+	@Test
+	void testOfferRejectUpdate() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
+		application = new Application(1, Application.OFFER_NAME, Application.A_OLD, "Summary", "Reviewer", true,
+				Command.R_INTCOMPLETED, notes);
+
+		assertEquals("Offer", application.getStateName());
+
+		Command acceptCommand = new Command(Command.CommandValue.REJECT, "Reviewer", Resolution.REVCOMPLETED, "note");
+
+		application.update(acceptCommand);
+		assertEquals("OfferCompleted", application.getResolution());
+		assertNull(application.getReviewer());
+		assertEquals("Old", application.getAppType());
+		assertEquals("Closed", application.getState());
+		assertEquals("-Note 1\n-[Closed] note\n", application.getNotesString());
+	}
+
+	/**
 	 * Tests the Closed state with invalid values.
 	 */
 	@Test

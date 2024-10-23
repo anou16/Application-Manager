@@ -168,7 +168,8 @@ public class Application {
 			}
 		}
 		if (state.equals(WAITLIST_NAME)) {
-			if (resolution != null && !resolution.equals(Command.R_REVCOMPLETED) && !resolution.equals(Command.R_INTCOMPLETED)) {
+			if (resolution != null && !resolution.equals(Command.R_REVCOMPLETED)
+					&& !resolution.equals(Command.R_INTCOMPLETED)) {
 				throw new IllegalArgumentException("Application cannot be created.");
 			}
 		}
@@ -851,9 +852,6 @@ public class Application {
 		 *                                       current state.
 		 */
 		public void updateState(Command command) {
-			if (command.getNote().isEmpty()) {
-				throw new UnsupportedOperationException("Invalid information.");
-			}
 			switch (command.getCommand()) {
 			case REOPEN:
 				if (getAppType() == A_NEW && getResolution() == Command.R_REVCOMPLETED) {

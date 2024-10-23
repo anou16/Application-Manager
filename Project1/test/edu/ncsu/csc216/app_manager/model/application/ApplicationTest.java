@@ -288,4 +288,20 @@ class ApplicationTest {
 		assertEquals("Closed", application.getState());
 		assertEquals("-Note 1\n-[Closed] note\n", application.getNotesString());
 	}
+
+	/**
+	 * Tests the Closed state with invalid values.
+	 */
+	@Test
+	void testClosedInvalid() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
+		application = new Application(1, Application.CLOSED_NAME, Application.A_OLD, "Summary", "Reviewer", true,
+				Command.R_INTCOMPLETED, notes);
+
+		Command acceptCommand = new Command(Command.CommandValue.REOPEN, "Reviewer", Resolution.INTCOMPLETED,
+				"Reviewer");
+
+		assertThrows(UnsupportedOperationException.class, () -> application.update(acceptCommand));
+	}
 }

@@ -157,23 +157,19 @@ public class Application {
 				&& (reviewer == null || reviewer.isEmpty())) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		if (state.equals(REFCHK_NAME)) {
-			if (reviewer == null || reviewer.isEmpty() || reviewer.isBlank() || "".equals(reviewer) || !confirmed) {
-				throw new IllegalArgumentException("Application cannot be created.");
-			}
+		if (state.equals(REFCHK_NAME) && (reviewer == null || reviewer.isEmpty() || reviewer.isBlank()
+				|| "".equals(reviewer) || !confirmed)) {
+			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		if (state.equals(OFFER_NAME)) {
-			if (reviewer == null || reviewer.isEmpty() || reviewer.isBlank() || "".equals(reviewer)) {
-				throw new IllegalArgumentException("Application cannot be created.");
-			}
+		if (state.equals(OFFER_NAME)
+				&& (reviewer == null || reviewer.isEmpty() || reviewer.isBlank() || "".equals(reviewer))) {
+			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		if (state.equals(WAITLIST_NAME)) {
-			if (resolution != null && !resolution.equals(Command.R_REVCOMPLETED)
-					&& !resolution.equals(Command.R_INTCOMPLETED)) {
-				throw new IllegalArgumentException("Application cannot be created.");
-			}
+		if (state.equals(WAITLIST_NAME) && (resolution != null && !resolution.equals(Command.R_REVCOMPLETED)
+				&& !resolution.equals(Command.R_INTCOMPLETED))) {
+			throw new IllegalArgumentException("Application cannot be created.");
 		}
-		if ((state.equals(WAITLIST_NAME) || state.equals(CLOSED_NAME))) {
+		if (state.equals(WAITLIST_NAME) || state.equals(CLOSED_NAME)) {
 			if (resolution == null || resolution.isEmpty()) {
 				throw new IllegalArgumentException("Application cannot be created.");
 			}
@@ -189,8 +185,7 @@ public class Application {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 		if (INTERVIEW_NAME.equals(state)) {
-			if (resolution != null
-					&& (!(resolution.isEmpty()) || !(resolution.isBlank()) || !("".equals(resolution)))) {
+			if (resolution != null && (!resolution.isEmpty() || !resolution.isBlank() || !"".equals(resolution))) {
 				throw new IllegalArgumentException("Application cannot be created.");
 			}
 			if (appType.equals(A_NEW)) {

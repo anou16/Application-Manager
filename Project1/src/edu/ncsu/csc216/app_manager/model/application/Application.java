@@ -168,7 +168,7 @@ public class Application {
 			}
 		}
 		if (state.equals(WAITLIST_NAME)) {
-			if (!resolution.equals(Command.R_REVCOMPLETED) && !resolution.equals(Command.R_INTCOMPLETED)) {
+			if (resolution != null && !resolution.equals(Command.R_REVCOMPLETED) && !resolution.equals(Command.R_INTCOMPLETED)) {
 				throw new IllegalArgumentException("Application cannot be created.");
 			}
 		}

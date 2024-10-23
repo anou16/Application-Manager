@@ -171,10 +171,14 @@ public class Application {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 		if (INTERVIEW_NAME.equals(state)) {
-			if (resolution != null && (!(resolution.isEmpty()) || !(resolution.isBlank()) || !("".equals(resolution)))) {
+			if (resolution != null
+					&& (!(resolution.isEmpty()) || !(resolution.isBlank()) || !("".equals(resolution)))) {
 				throw new IllegalArgumentException("Application cannot be created.");
 			}
- 		}
+			if (appType.equals(A_NEW)) {
+				throw new IllegalArgumentException("Application cannot be created.");
+			}
+		}
 		if ((state == INTERVIEW_NAME || state == REVIEW_NAME) && confirmed) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}

@@ -153,8 +153,9 @@ public class Application {
 	 */
 	public Application(int id, String state, String appType, String summary, String reviewer, boolean confirmed,
 			String resolution, ArrayList<String> notes) {
-		if ((state == INTERVIEW_NAME || state == OFFER_NAME || state == REFCHK_NAME || state == WAITLIST_NAME)
-				&& (reviewer == null || reviewer.isEmpty())) {
+		if ((state == INTERVIEW_NAME || state == OFFER_NAME
+				|| (state == REFCHK_NAME && appType == A_OLD || state == WAITLIST_NAME)
+						&& (reviewer == null || reviewer.isEmpty()))) {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 		if ((state == WAITLIST_NAME || state == CLOSED_NAME) && (resolution == null || resolution.isEmpty())) {

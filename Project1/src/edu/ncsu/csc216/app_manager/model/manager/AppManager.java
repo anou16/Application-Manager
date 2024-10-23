@@ -15,7 +15,7 @@ import edu.ncsu.csc216.app_manager.model.io.AppWriter;
 public class AppManager {
 
 	/** The Singleton instance for AppManager. */
-	private static AppManager instance;
+	private static final AppManager instance = new AppManager();
 	/** A list containing applications. */
 	private AppList appList;
 
@@ -32,9 +32,6 @@ public class AppManager {
 	 * @return AppManager the instance of AppManager.
 	 */
 	public static synchronized AppManager getInstance() {
-		if (instance == null) {
-			instance = new AppManager();
-		}
 		return instance;
 	}
 

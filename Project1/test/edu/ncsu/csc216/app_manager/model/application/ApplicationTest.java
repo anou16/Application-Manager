@@ -232,15 +232,15 @@ class ApplicationTest {
 	void testRefChkAcceptUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.REFCHK_NAME, Application.A_OLD, "Summary", "Reviewer", false,
-				Command.R_REVCOMPLETED, notes);
+		application = new Application(1, Application.REFCHK_NAME, Application.A_OLD, "Summary", "Reviewer", true,
+				Command.R_INTCOMPLETED, notes);
 
 		assertEquals("RefCheck", application.getStateName());
 
 		Command acceptCommand = new Command(Command.CommandValue.ACCEPT, "Reviewer", Resolution.REVCOMPLETED, "note");
 
 		application.update(acceptCommand);
-		assertEquals("ReviewCompleted", application.getResolution());
+		assertEquals("InterviewCompleted", application.getResolution());
 		assertEquals("Old", application.getAppType());
 		assertEquals("Offer", application.getState());
 		assertEquals("-Note 1\n-[Offer] note\n", application.getNotesString());
@@ -254,8 +254,8 @@ class ApplicationTest {
 	void testRefChkRejectUpdate() {
 		ArrayList<String> notes = new ArrayList<>();
 		notes.add("Note 1");
-		application = new Application(1, Application.REFCHK_NAME, Application.A_OLD, "Summary", "Reviewer", false,
-				Command.R_REVCOMPLETED, notes);
+		application = new Application(1, Application.REFCHK_NAME, Application.A_OLD, "Summary", "Reviewer", true,
+				Command.R_INTCOMPLETED, notes);
 
 		assertEquals("RefCheck", application.getStateName());
 

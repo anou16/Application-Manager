@@ -158,7 +158,7 @@ public class Application {
 			throw new IllegalArgumentException("Application cannot be created.");
 		}
 		if (state.equals(REFCHK_NAME)) {
-			if (reviewer == null || reviewer.isEmpty() || reviewer.isBlank() || "".equals(reviewer)) {
+			if (reviewer == null || reviewer.isEmpty() || reviewer.isBlank() || "".equals(reviewer) || !confirmed) {
 				throw new IllegalArgumentException("Application cannot be created.");
 			}
 		}

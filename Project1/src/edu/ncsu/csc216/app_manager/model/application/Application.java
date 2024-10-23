@@ -162,8 +162,20 @@ public class Application {
 				throw new IllegalArgumentException("Application cannot be created.");
 			}
 		}
-		if ((state == WAITLIST_NAME || state == CLOSED_NAME) && (resolution == null || resolution.isEmpty())) {
-			throw new IllegalArgumentException("Application cannot be created.");
+		if (state.equals(OFFER_NAME)) {
+			if (reviewer == null || reviewer.isEmpty() || reviewer.isBlank() || "".equals(reviewer)) {
+				throw new IllegalArgumentException("Application cannot be created.");
+			}
+		}
+		if (state.equals(WAITLIST_NAME)) {
+			if (!resolution.equals(Command.R_REVCOMPLETED) && !resolution.equals(Command.R_INTCOMPLETED)) {
+				throw new IllegalArgumentException("Application cannot be created.");
+			}
+		}
+		if ((state.equals(WAITLIST_NAME) || state.equals(CLOSED_NAME))) {
+			if (resolution == null || resolution.isEmpty()) {
+				throw new IllegalArgumentException("Application cannot be created.");
+			}
 		}
 		if ((state == INTERVIEW_NAME || state == REFCHK_NAME || state == OFFER_NAME) && (appType == A_NEW)) {
 			throw new IllegalArgumentException("Application cannot be created.");
@@ -189,6 +201,14 @@ public class Application {
 		}
 		if (resolution == Command.R_REVCOMPLETED && confirmed) {
 			throw new IllegalArgumentException("Application cannot be created.");
+		}
+		if (appType.equals(A_NEW)) {
+			if (confirmed) {
+				throw new IllegalArgumentException("Application cannot be created.");
+			}
+			if (resolution != null && resolution.equals(Command.R_INTCOMPLETED)) {
+				throw new IllegalArgumentException("Application cannot be created.");
+			}
 		}
 		setAppId(id);
 		setState(state);

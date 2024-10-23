@@ -62,17 +62,14 @@ class AppReaderTest {
 		assertThrows(IllegalArgumentException.class,
 				() -> AppReader.readAppsFromFile("test-files/invalid_application.txt"));
 	}
-	
+
 	/**
 	 * Tests reading from invalid file 8.
 	 */
 	@Test
 	void testReadAppsFromInvalidFile8() {
-		assertThrows(IllegalArgumentException.class,
-				() -> AppReader.readAppsFromFile("test-files/app8.txt"));
-		assertThrows(IllegalArgumentException.class,
-				() -> AppReader.readAppsFromFile("test-files/app10.txt"));
-		assertThrows(IllegalArgumentException.class,
-				() -> AppReader.readAppsFromFile("test-files/app11.txt"));
+		assertThrows(IllegalArgumentException.class, () -> AppReader.readAppsFromFile("test-files/app15.txt"));
+		assertThrows(IllegalArgumentException.class, () -> AppReader.readAppsFromFile("test-files/app16.txt"));
+		assertThrows(IllegalArgumentException.class, () -> AppReader.readAppsFromFile("test-files/app18.txt"));
 	}
 }

@@ -7,6 +7,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -28,6 +30,7 @@ class AppReaderTest {
 	 */
 	@Test
 	void testReadAppsFromValidFile() {
+		assertDoesNotThrow(() -> new AppReader());
 		ArrayList<Application> apps = AppReader.readAppsFromFile(validTest);
 
 		assertEquals(6, apps.size());

@@ -31,7 +31,7 @@ public class AppManager {
 	 * 
 	 * @return AppManager the instance of AppManager.
 	 */
-	public static AppManager getInstance() {
+	public static synchronized AppManager getInstance() {
 		if (instance == null) {
 			instance = new AppManager();
 		}

@@ -225,6 +225,27 @@ class ApplicationTest {
 	}
 
 	/**
+	 * Tests the update state method with the reopen command for wait list state.
+	 */
+	@Test
+	void testWaitlistReopenUpdateIntCompleted() {
+		ArrayList<String> notes = new ArrayList<>();
+		notes.add("Note 1");
+		application = new Application(1, Application.WAITLIST_NAME, Application.A_OLD, "Summary", "Reviewer", false,
+				Command.R_INTCOMPLETED, notes);
+
+		assertEquals("Waitlist", application.getStateName());
+
+		Command acceptCommand = new Command(Command.CommandValue.REOPEN, "Reviewer", Resolution.REVCOMPLETED, "note");
+
+		application.update(acceptCommand);
+		assertNull(application.getResolution());
+		assertEquals("Old", application.getAppType());
+		assertEquals("RefCheck", application.getState());
+		assertEquals("-Note 1\n-[RefCheck] note\n", application.getNotesString());
+	}
+
+	/**
 	 * Tests the update state method with the accept command for reference check
 	 * state.
 	 */

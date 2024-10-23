@@ -92,4 +92,21 @@ class AppManagerTest {
 		assertEquals("Summary", appManager.getAppById(1).getSummary());
 		assertEquals("Old", appManager.getAppById(1).getAppType());
 	}
+
+	/**
+	 * Tests the execute command method.
+	 */
+	@Test
+	void testDeleteAppById() {
+		appManager = AppManager.getInstance();
+		appManager.createNewAppList();
+
+		appManager.addAppToList(AppType.NEW, "Summary", "Note");
+		appManager.addAppToList(AppType.NEW, "Summary", "Note");
+		appManager.addAppToList(AppType.OLD, "Summary", "Note");
+
+		assertEquals("New", appManager.getAppById(1).getAppType());
+		appManager.deleteAppById(1);
+		assertEquals(2, appManager.getAppListAsArray().length);
+	}
 }
